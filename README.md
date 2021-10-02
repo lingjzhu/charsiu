@@ -7,7 +7,7 @@
 
 
 #### Fun fact
-Char Siu is one of the most representative dishes of Cantonese cuisine ([wiki](https://en.wikipedia.org/wiki/Char_siu)). The first author takes pride in his Cantonese identity and is in the process of creating a series of tools and packages named after Cantonese cuisine. This name also represents the nature of this tool very well in that it emphasizes the the 'char'acters recognised and aligned by the tool. 
+Char Siu is one of the most representative dishes of Cantonese cuisine ([wiki](https://en.wikipedia.org/wiki/Char_siu)). 
 
 
 ### Demo
