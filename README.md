@@ -16,12 +16,12 @@ Char Siu is one of the most representative dishes of Cantonese cuisine ([wiki](h
 ### Attribution and Citation
 For now, you can cite this tool as:
 
-@article{zhu2019cnn,
-  title={Semi-supervised Learning of phone-to-audio alignment},
-  author={Zhu, Jian and Zhang, Cong and Jurgens, David},
-  journal={arXiv preprint arXiv:????????????????????},
-  year={2021}
-}
+>@article{zhu2019cnn,
+>  title={Semi-supervised Learning of phone-to-audio alignment},
+>  author={Zhu, Jian and Zhang, Cong and Jurgens, David},
+>  journal={arXiv preprint arXiv:????????????????????},
+>  year={2021}
+> }
 Or
 
 Zhu, Jian, Zhang, Cong, and Jurgens, David (2021). Semi-supervised Learning of phone-to-audio alignment. ????????????
