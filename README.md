@@ -1,7 +1,7 @@
 # Charsiu: A transformer-based phonetic aligner
 
 ### Intro
-Charsiu is a phonetic alignment tool, which can:
+**Charsiu** is a phonetic alignment tool, which can:
 - automatically recognise the text and phonemes in a given audio file
 - automatically align the phonemes and generate time stamps for the phonemes using text transcription created by the previous step or provided by the user.
 
@@ -53,7 +53,7 @@ To share a direct web link: https://github.com/lingjzhu/charsiu/.
 ### Disclaimer
 
 This tool is a beta version and is still under active development. It may have bugs and quirks, alongside the difficulties and provisos which are described throughout the documentation. 
-This tool is distributed under MIT liscence. Please see [license] (https://github.com/lingjzhu/charsiu/blob/main/LICENSE) for details. 
+This tool is distributed under MIT liscence. Please see [license](https://github.com/lingjzhu/charsiu/blob/main/LICENSE) for details. 
 
 _THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
