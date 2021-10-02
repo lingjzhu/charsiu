@@ -12,6 +12,8 @@ Char Siu is one of the most representative dishes of Cantonese cuisine ([wiki](h
 
 ### Demo
 
+### Pretrained models
+Our pretrained models are availble at the HuggingFace model hub: https://huggingface.co/charsiu.
 
 ### Attribution and Citation
 For now, you can cite this tool as:
