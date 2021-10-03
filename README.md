@@ -12,8 +12,21 @@ Char Siu is one of the most representative dishes of Cantonese cuisine ([wiki](h
 
 ### Demo
 
+
+
+### Development plan
+|      Language      | Progress |
+|:------------------:|:--------:|
+| English (American) |     √    |
+|  Mandarin Chinese  | Nov 2021 |
+|       Spanish      | Dec 2021 |
+|  English (British) |    TBD   |
+|    Cross-lingual   |    TBD   |
+
+
 ### Pretrained models
 Our pretrained models are availble at the *HuggingFace* model hub: https://huggingface.co/charsiu.
+
 
 ### Attribution and Citation
 For now, you can cite this tool as:
@@ -36,15 +49,6 @@ To share a direct web link: https://github.com/lingjzhu/charsiu/.
 ### Experiments  
 #### Training details  
 #### Ablation analysis
-
-### Development plan
-|      Language      | Progress |
-|:------------------:|:--------:|
-| English (American) |     √    |
-|  Mandarin Chinese  | Nov 2021 |
-|       Spanish      | Dec 2021 |
-|  English (British) |    TBD   |
-|    Cross-lingual   |    TBD   |
 
 ### References
 [Transformers](https://huggingface.co/transformers/)  
