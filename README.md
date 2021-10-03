@@ -21,7 +21,7 @@ Char Siu is one of the most representative dishes of Cantonese cuisine ([wiki](h
 |  Mandarin Chinese  | Nov 2021 |
 |       Spanish      | Dec 2021 |
 |  English (British) |    TBD   |
-|    Cross-lingual   |    TBD   |
+|    Cantonese       |    TBD   |
 
 
 ### Pretrained models
