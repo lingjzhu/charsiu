@@ -28,6 +28,20 @@ Char Siu is one of the most representative dishes of Cantonese cuisine ([wiki](h
 Our pretrained models are availble at the *HuggingFace* model hub: https://huggingface.co/charsiu.
 
 
+### Dependencies
+pytorch  
+transformers  
+datasets  
+librosa
+g2pe  
+
+### Training
+Coming soon!
+
+### Finetuning
+Coming soon!
+
+
 ### Attribution and Citation
 For now, you can cite this tool as:
 
@@ -39,16 +53,8 @@ For now, you can cite this tool as:
 > }
 Or
 
-Zhu, Jian, Zhang, Cong, and Jurgens, David (2021). Semi-supervised Learning of phone-to-audio alignment. ????????????
 
 To share a direct web link: https://github.com/lingjzhu/charsiu/.
-### Training
-
-### Finetuning
-
-### Experiments  
-#### Training details  
-#### Ablation analysis
 
 ### References
 [Transformers](https://huggingface.co/transformers/)  
