@@ -6,7 +6,7 @@
 - automatically align the phonemes and generate time stamps for the phonemes using text transcription created by the previous step or provided by the user.
 
 
-Fun fact: Char Siu is one of the most representative dishes of Cantonese cuisine 🍲 (see [wiki](https://en.wikipedia.org/wiki/Char_siu)). 
+**Fun fact**: Char Siu is one of the most representative dishes of Cantonese cuisine 🍲 (see [wiki](https://en.wikipedia.org/wiki/Char_siu)). 
 
 
 ### Demo
@@ -47,8 +47,8 @@ Coming soon!
 For now, you can cite this tool as:
 
 ```
-@article{zhu2019cnn,
-  title={Semi-supervised Learning of phone-to-audio alignment},
+@article{zhu2019charsiu,
+  title={Phone-to-audio alignment without text: A Semi-supervised Approach},
   author={Zhu, Jian and Zhang, Cong and Jurgens, David},
   journal={arXiv preprint arXiv:????????????????????},
   year={2021}
@@ -91,7 +91,7 @@ By using this tool, you acknowledge:
 All that said, thanks for using our tool, and we hope it works wonderfully for you!
 
 ### Support or Contact
-Please contact Jian Zhu (lingjzhu@umich.edu) for technical support. 
+Please contact Jian Zhu (lingjzhu@umich.edu) for technical support.  
 Contact Cong Zhang (cong.zhang@ru.nl) if you would like to receive more instructions on how to use the package.
 
 
