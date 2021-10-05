@@ -44,16 +44,17 @@ Coming soon!
 ### Finetuning
 Coming soon!
 
-
 ### Attribution and Citation
 For now, you can cite this tool as:
 
->@article{zhu2019cnn,
->  title={Semi-supervised Learning of phone-to-audio alignment},
->  author={Zhu, Jian and Zhang, Cong and Jurgens, David},
->  journal={arXiv preprint arXiv:????????????????????},
->  year={2021}
-> }
+```
+@article{zhu2019cnn,
+  title={Semi-supervised Learning of phone-to-audio alignment},
+  author={Zhu, Jian and Zhang, Cong and Jurgens, David},
+  journal={arXiv preprint arXiv:????????????????????},
+  year={2021}
+ }
+```
 Or
 
 
@@ -72,26 +73,27 @@ This tool is distributed under MIT liscence. Please see [license](https://github
 
 By using this tool, you acknowledge:
 
-That you understand that this tool does not produce perfect camera-ready data, and that all results should be hand-checked for sanity's sake, or at the very least, noise should be taken into account.
+* That you understand that this tool does not produce perfect camera-ready data, and that all results should be hand-checked for sanity's sake, or at the very least, noise should be taken into account.
 
-That you understand that this tool is a work in progress which may contain bugs. Future versions will be released, and bug fixes (and additions) will not necessarily be advertised.
+* That you understand that this tool is a work in progress which may contain bugs.  Future versions will be released, and bug fixes (and additions) will not necessarily be advertised.
 
-That this tool may break with future updates of the various dependencies, and that the authors are not required to repair the package when that happens.
+* That this tool may break with future updates of the various dependencies, and that the authors are not required to repair the package when that happens.
 
-That you understand that the authors are not required or necessarily available to fix bugs which are encountered (although you're welcome to submit bug reports to Jian Zhu (lingjzhu@umich.edu), if needed), nor to modify the tool to your needs.
+* That you understand that the authors are not required or necessarily available to fix bugs which are encountered (although you're welcome to submit bug reports to Jian Zhu (lingjzhu@umich.edu), if needed), nor to modify the tool to your needs.
 
-That you will acknowledge the authors of the tool if you use, modify, fork, or re-use the code in your future work.
+* That you will acknowledge the authors of the tool if you use, modify, fork, or re-use the code in your future work.  
 
-That rather than re-distributing this tool to other researchers, you will instead advise them to download the latest version from the website.
+* That rather than re-distributing this tool to other researchers, you will instead advise them to download the latest version from the website.
 
 ... and, most importantly:
 
-That neither the authors, our collaborators, nor the the University of Michigan on the whole, are responsible for the results obtained from the proper or improper usage of the tool, and that the tool is provided as-is, as a service to our fellow linguists.
+* That neither the authors, our collaborators, nor the the University of Michigan on the whole, are responsible for the results obtained from the proper or improper usage of the tool, and that the tool is provided as-is, as a service to our fellow linguists.
 
 All that said, thanks for using our tool, and we hope it works wonderfully for you!
 
 ### Support or Contact
-Please contact Jian Zhu (lingjzhu@umich.edu) for technical support. Contact Cong Zhang (cong.zhang@ru.nl) if you would like to receive more instructions on how to use the package.
+Please contact Jian Zhu (lingjzhu@umich.edu) for technical support. 
+Contact Cong Zhang (cong.zhang@ru.nl) if you would like to receive more instructions on how to use the package.
 
 
 
