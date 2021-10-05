@@ -6,8 +6,7 @@
 - automatically align the phonemes and generate time stamps for the phonemes using text transcription created by the previous step or provided by the user.
 
 
-#### Fun fact
-Char Siu is one of the most representative dishes of Cantonese cuisine ([wiki](https://en.wikipedia.org/wiki/Char_siu)). 
+Fun fact: Char Siu is one of the most representative dishes of Cantonese cuisine 🍲 (see [wiki](https://en.wikipedia.org/wiki/Char_siu)). 
 
 
 ### Demo
