@@ -87,7 +87,7 @@ By using this tool, you acknowledge:
 
 ... and, most importantly:
 
-* That neither the authors, our collaborators, nor the the University of Michigan on the whole, are responsible for the results obtained from the proper or improper usage of the tool, and that the tool is provided as-is, as a service to our fellow linguists.
+* That neither the authors, our collaborators, nor the the University of Michigan or any related universities on the whole, are responsible for the results obtained from the proper or improper usage of the tool, and that the tool is provided as-is, as a service to our fellow linguists.
 
 All that said, thanks for using our tool, and we hope it works wonderfully for you!
 
