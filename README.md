@@ -36,6 +36,7 @@ transformers
 datasets  
 librosa
 g2pe  
+praatio
 
 ### Training
 Coming soon!
