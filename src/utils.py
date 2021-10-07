@@ -91,7 +91,7 @@ def ctc2duration(phones,resolution=0.01):
 
 def seq2duration(phones,resolution=0.01):
     counter = 0
-    out = []\n",
+    out = []
     for p,group in groupby(phones):
         length = len(list(group))
         out.append((round(counter*resolution,2),round((counter+length)*resolution,2),p))
