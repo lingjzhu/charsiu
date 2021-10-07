@@ -10,11 +10,9 @@
 **Fun fact**: Char Siu is one of the most representative dishes of Cantonese cuisine 🍲 (see [wiki](https://en.wikipedia.org/wiki/Char_siu)). 
 
 
-### Demo
+### Tutorial (In progress)
   [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/lingjzhu/charsiu/blob/development/charsiu_demo.ipynb)  
 
-### Tutorial
-Coming soon!
 
 
 ### Development plan
