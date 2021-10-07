@@ -89,6 +89,16 @@ def ctc2duration(phones,resolution=0.01):
     return merged
 
 
+def seq2duration(phones,resolution=0.01):
+    counter = 0
+    out = []\n",
+    for p,group in groupby(phones):
+        length = len(list(group))
+        out.append((round(counter*resolution,2),round((counter+length)*resolution,2),p))
+        counter += length
+    return out
+
+
 def duration2textgrid(duration_seq,save_path=None):
     tg = textgrid.Textgrid()
     phoneTier = textgrid.IntervalTier('phones', duration_seq, 0, duration_seq[-1][1])
