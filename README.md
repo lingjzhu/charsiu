@@ -1,5 +1,7 @@
 # Charsiu: A transformer-based phonetic aligner
 
+**Note.** This is a preview version. The aligner is under active development. It will be ready soon!
+
 ### Intro
 **Charsiu** is a phonetic alignment tool, which can:
 - automatically recognise the text and phonemes in a given audio file
