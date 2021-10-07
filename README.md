@@ -11,11 +11,11 @@
 **Fun fact**: Char Siu is one of the most representative dishes of Cantonese cuisine 🍲 (see [wiki](https://en.wikipedia.org/wiki/Char_siu)). 
 
 
-### Demo
+### Tutorial (In progress)
+You can directly run our model in the cloud via Google Colab!  
+ - Forced alignment:   [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/lingjzhu/charsiu/blob/development/charsiu_demo.ipynb)  
+ - Textless alignmnet: coming soon!
 
-
-### Tutorial
-Coming soon!
 
 
 ### Development plan
