@@ -63,7 +63,7 @@ def audio_preprocess(path,sr=16000):
     
     if sr == 16000:    
         features,fs = sf.read(path)
-        assert fs = 16000
+        assert fs == 16000
     else:
         features, _ = librosa.core.load(path,sr=sr)
     return processor(features, sampling_rate=16000).input_values.squeeze()
