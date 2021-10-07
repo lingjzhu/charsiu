@@ -36,7 +36,7 @@ Our pretrained models are availble at the *HuggingFace* model hub: https://huggi
 pytorch  
 transformers  
 datasets  
-librosa
+librosa  
 g2pe  
 praatio
 
