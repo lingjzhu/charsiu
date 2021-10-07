@@ -11,7 +11,9 @@
 
 
 ### Tutorial (In progress)
-Forced alignment:   [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/lingjzhu/charsiu/blob/development/charsiu_demo.ipynb)  
+You can directly run our model in the cloud via Google Colab!  
+ - Forced alignment:   [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/lingjzhu/charsiu/blob/development/charsiu_demo.ipynb)  
+ - Textless alignmnet: coming soon!
 
 
 
