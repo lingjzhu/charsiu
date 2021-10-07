@@ -4,10 +4,9 @@
 
 ### Intro
 **Charsiu** is a phonetic alignment tool, which can:
-- automatically recognise the text and phonemes in a given audio file
-- automatically align the phonemes and generate time stamps for the phonemes using text transcription created by the previous step or provided by the user.
-
-
+- recognise phonemes in a given audio file
+- align the phonemes and generate time stamps for the phonemes using phone transcriptions created in the previous step or provided by the user.
+- directly predict the phone-to-audio alignment from audio (text-independent alignment)
 **Fun fact**: Char Siu is one of the most representative dishes of Cantonese cuisine 🍲 (see [wiki](https://en.wikipedia.org/wiki/Char_siu)). 
 
 
