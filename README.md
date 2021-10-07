@@ -11,7 +11,7 @@
 
 
 ### Demo
-  [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/lingjzhu/charsiu/blob/master/charsiu_demo.ipynb)  
+  [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/lingjzhu/charsiu/blob/development/charsiu_demo.ipynb)  
 
 ### Tutorial
 Coming soon!
