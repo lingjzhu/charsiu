@@ -14,6 +14,7 @@ from tqdm import tqdm
 from praatio import textgrid
 from collections import defaultdict, Counter
 from itertools import groupby
+from librosa.sequence import dtw
 from transformers import Wav2Vec2CTCTokenizer,Wav2Vec2FeatureExtractor, Wav2Vec2Processor
 
 
@@ -178,6 +179,20 @@ def insert_sil(phones):
                 out.append((out[-1][1],s,'[SIL]'))
         out.append((s,e,p))
     return out
+
+
+def forced_align(cost, phone_ids):
+    D,align = dtw(C=-cost[:,phone_ids])
+
+    align_seq = [-1 for i in range(max(align[:,0])+1)]
+    for i in list(align):
+    #    print(align)
+        if align_seq[i[0]]<i[1]:
+            align_seq[i[0]]=i[1]
+
+    align_id = list(align_seq)
+    return align_id
+
 
 
 if __name__ == '__main__':
