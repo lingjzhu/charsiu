@@ -1,6 +1,6 @@
 # Charsiu: A transformer-based phonetic aligner
 
-**Note.** This is a preview version. The aligner is under active development. It will be ready soon!
+**Note.** This is a preview version. The aligner is under active development. New functions, new languages and detailed documentation will be added soon!
 
 ### Intro
 **Charsiu** is a phonetic alignment tool, which can:
@@ -19,6 +19,16 @@ You can directly run our model in the cloud via Google Colab!
 
 
 ### Development plan
+
+ - Package  
+
+|     Items          | Progress |
+|:------------------:|:--------:|
+|  Documentation     | Nov 2021 |    
+|  Textgrid support  | Nov 2021 |
+
+ - Multilingual support
+
 |      Language      | Progress |
 |:------------------:|:--------:|
 | English (American) |     √    |
