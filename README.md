@@ -18,6 +18,15 @@ You can directly run our model in the cloud via Google Colab!
 
 
 ### Development plan
+
+
+|     Items          | Progress |
+|:------------------:|:--------:|
+|  Documentation     | Nov 2021 |    
+|  Textgrid support  | Nov 2021 |
+
+
+
 |      Language      | Progress |
 |:------------------:|:--------:|
 | English (American) |     √    |
