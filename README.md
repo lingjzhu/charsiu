@@ -26,6 +26,7 @@ You can directly run our model in the cloud via Google Colab!
 |:------------------:|:--------:|
 |  Documentation     | Nov 2021 |    
 |  Textgrid support  | Nov 2021 |
+| Model compression  |   TBD    |
 
  - Multilingual support
 
@@ -36,7 +37,7 @@ You can directly run our model in the cloud via Google Colab!
 |       Spanish      | Dec 2021 |
 |  English (British) |    TBD   |
 |    Cantonese       |    TBD   |
-
+|    AAVE            |    TBD   |
 
 ### Pretrained models
 Our pretrained models are availble at the *HuggingFace* model hub: https://huggingface.co/charsiu.
