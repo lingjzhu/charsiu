@@ -3,7 +3,7 @@
 **Note.** This is a preview version. The aligner is under active development. New functions, new languages and detailed documentation will be added soon!
 
 ### Intro
-**Charsiu** is a phonetic alignment tool [[pdf]](https://github.com/lingjzhu/charsiu/blob/main/local/Jian_ICASSP_phone_segementation.pdf), which can:
+**Charsiu** is a phonetic alignment tool [[arXiv]](https://arxiv.org/abs/2110.03876), which can:
 - recognise phonemes in a given audio file
 - perform forced alignment using phone transcriptions created in the previous step or provided by the user.
 - directly predict the phone-to-audio alignment from audio (text-independent alignment)
