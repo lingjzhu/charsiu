@@ -1,4 +1,4 @@
-# Charsiu: A transformer-based phonetic aligner [[arXiv]](https://arxiv.org/abs/2110.03876)
+## Charsiu: A transformer-based phonetic aligner [[arXiv]](https://arxiv.org/abs/2110.03876)
 
 **Note.** This is a preview version. The aligner is under active development. New functions, new languages and detailed documentation will be added soon!
 
