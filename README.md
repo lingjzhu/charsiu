@@ -13,7 +13,7 @@
 ### Tutorial (In progress)
 You can directly run our model in the cloud via Google Colab!  
  - Forced alignment:   [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/lingjzhu/charsiu/blob/development/charsiu_forced_alignment_demo.ipynb)  
- - Textless alignmnet: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/lingjzhu/charsiu/blob/development/charsiu_textless_demo.ipynb)  
+ - Textless alignment: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/lingjzhu/charsiu/blob/development/charsiu_textless_demo.ipynb)  
 
 
 
@@ -38,7 +38,7 @@ You can directly run our model in the cloud via Google Colab!
 
 
 ### Pretrained models
-Our pretrained models are availble at the *HuggingFace* model hub: https://huggingface.co/charsiu.
+Our pretrained models are available at the *HuggingFace* model hub: https://huggingface.co/charsiu.
 
 
 ### Dependencies
@@ -62,7 +62,7 @@ For now, you can cite this tool as:
 @article{zhu2019charsiu,
   title={Phone-to-audio alignment without text: A Semi-supervised Approach},
   author={Zhu, Jian and Zhang, Cong and Jurgens, David},
-  journal={arXiv preprint arXiv:????????????????????},
+  journal={arXiv preprint arXiv:https://arxiv.org/abs/2110.03876},
   year={2021}
  }
 ```
@@ -80,7 +80,7 @@ To share a direct web link: https://github.com/lingjzhu/charsiu/.
 ### Disclaimer
 
 This tool is a beta version and is still under active development. It may have bugs and quirks, alongside the difficulties and provisos which are described throughout the documentation. 
-This tool is distributed under MIT liscence. Please see [license](https://github.com/lingjzhu/charsiu/blob/main/LICENSE) for details. 
+This tool is distributed under MIT licence. Please see [license](https://github.com/lingjzhu/charsiu/blob/main/LICENSE) for details. 
 
 By using this tool, you acknowledge:
 
@@ -103,8 +103,8 @@ By using this tool, you acknowledge:
 All that said, thanks for using our tool, and we hope it works wonderfully for you!
 
 ### Support or Contact
-Please contact Jian Zhu (lingjzhu@umich.edu) for technical support.  
-Contact Cong Zhang (cong.zhang@ru.nl) if you would like to receive more instructions on how to use the package.
+Please contact Jian Zhu ([lingjzhu@umich.edu](lingjzhu@umich.edu)) for technical support.  
+Contact Cong Zhang ([cong.zhang@ru.nl](cong.zhang@ru.nl)) if you would like to receive more instructions on how to use the package.
 
 
 
