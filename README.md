@@ -1,12 +1,13 @@
-# Charsiu: A transformer-based phonetic aligner
+## Charsiu: A transformer-based phonetic aligner [[arXiv]](https://arxiv.org/abs/2110.03876)
 
 **Note.** This is a preview version. The aligner is under active development. New functions, new languages and detailed documentation will be added soon!
 
 ### Intro
 **Charsiu** is a phonetic alignment tool, which can:
 - recognise phonemes in a given audio file
-- align the phonemes and generate time stamps for the phonemes using phone transcriptions created in the previous step or provided by the user.
-- directly predict the phone-to-audio alignment from audio (text-independent alignment)  
+- perform forced alignment using phone transcriptions created in the previous step or provided by the user.
+- directly predict the phone-to-audio alignment from audio (text-independent alignment)
+
 **Fun fact**: Char Siu is one of the most representative dishes of Cantonese cuisine 🍲 (see [wiki](https://en.wikipedia.org/wiki/Char_siu)). 
 
 
@@ -25,6 +26,7 @@ You can directly run our model in the cloud via Google Colab!
 |:------------------:|:--------:|
 |  Documentation     | Nov 2021 |    
 |  Textgrid support  | Nov 2021 |
+| Model compression  |   TBD    |
 
  - Multilingual support
 
@@ -35,7 +37,7 @@ You can directly run our model in the cloud via Google Colab!
 |       Spanish      | Dec 2021 |
 |  English (British) |    TBD   |
 |    Cantonese       |    TBD   |
-
+|    AAVE            |    TBD   |
 
 ### Pretrained models
 Our pretrained models are available at the *HuggingFace* model hub: https://huggingface.co/charsiu.
