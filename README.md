@@ -82,7 +82,7 @@ To share a direct web link: https://github.com/lingjzhu/charsiu/.
 ### Disclaimer
 
 This tool is a beta version and is still under active development. It may have bugs and quirks, alongside the difficulties and provisos which are described throughout the documentation. 
-This tool is distributed under MIT licence. Please see [license](https://github.com/lingjzhu/charsiu/blob/main/LICENSE) for details. 
+This tool is distributed under MIT license. Please see [license](https://github.com/lingjzhu/charsiu/blob/main/LICENSE) for details. 
 
 By using this tool, you acknowledge:
 
