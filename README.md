@@ -64,7 +64,7 @@ For now, you can cite this tool as:
 @article{zhu2019charsiu,
   title={Phone-to-audio alignment without text: A Semi-supervised Approach},
   author={Zhu, Jian and Zhang, Cong and Jurgens, David},
-  journal={arXiv preprint arXiv:????????????????????},
+  journal={arXiv preprint arXiv:https://arxiv.org/abs/2110.03876},
   year={2021}
  }
 ```
