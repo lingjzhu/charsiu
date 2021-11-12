@@ -1,34 +1,24 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import re
-import argparse
-import transformers
 
-import numpy as np
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional, Union, Tuple
-from g2p_en import G2p
-from datasets import load_dataset, load_metric, load_from_disk
-from transformers import Wav2Vec2CTCTokenizer
-from transformers import Wav2Vec2FeatureExtractor
-from transformers import Trainer,TrainingArguments
-from transformers import Wav2Vec2Processor
-from transformers import Wav2Vec2ForCTC, Wav2Vec2Config, Wav2Vec2ForPreTraining
-from transformers.models.wav2vec2.modeling_wav2vec2 import _compute_mask_indices,Wav2Vec2ForPreTrainingOutput
-from transformers.file_utils import ModelOutput
+from typing import Optional
+from transformers import Wav2Vec2ForCTC, Wav2Vec2ForPreTraining
 from transformers.modeling_outputs import CausalLMOutput, MaskedLMOutput
 from transformers import BertForMaskedLM, BertConfig
-from transformers import AdamW
 
 from torch.nn.utils.rnn import pack_padded_sequence,pad_packed_sequence
 
 
 class ForwardSumLoss(torch.nn.Module):
+    '''
+    Implementation from: https://nv-adlr.github.io/one-tts-alignment
+    '''
     def __init__(self, blank_logprob=-1):
         super(ForwardSumLoss, self).__init__()
         self.log_softmax = torch.nn.LogSoftmax(dim=3)
@@ -91,6 +81,9 @@ class ForwardSumLoss(torch.nn.Module):
     
     
 class ConvBank(nn.Module):
+    '''
+    Implementation from: https://github.com/s3prl/s3prl/blob/master/s3prl/downstream/libri_phone/model.py
+    '''
     def __init__(self, input_dim, output_class_num, kernels, cnn_size, hidden_size, dropout, **kwargs):
         super(ConvBank, self).__init__()
         self.drop_p = dropout
@@ -143,7 +136,9 @@ class RNN(nn.Module):
     
     
 class Wav2Vec2ForAttentionAlignment(Wav2Vec2ForPreTraining):
-    
+    '''
+    Implementation adapted from: https://huggingface.co/transformers/_modules/transformers/models/wav2vec2/modeling_wav2vec2.html#Wav2Vec2ForPreTraining
+    '''
     def __init__(self,config):
         super().__init__(config)
         bert_config = self.get_bert_config(config)
@@ -208,7 +203,15 @@ class Wav2Vec2ForAttentionAlignment(Wav2Vec2ForPreTraining):
         weight=1
     ):
     
-
+        # check the availability of attention masks
+        # if not present, create full attention masks
+        if attention_mask is None:
+            attention_mask = torch.ones_like(input_values)
+            
+        if labels_attention_mask is None:
+            labels_attention_mask = torch.ones_like(labels)
+            
+        
 
         outputs = self.wav2vec2(
             input_values,
@@ -435,7 +438,7 @@ class Wav2Vec2ForFrameClassification(Wav2Vec2ForCTC):
             attention_mask = (
                 attention_mask if attention_mask is not None else torch.ones_like(input_values, dtype=torch.long)
             )
-            input_lengths = self._get_feat_extract_output_lengths(attention_mask.sum(-1)).to(torch.long)
+#            input_lengths = self._get_feat_extract_output_lengths(attention_mask.sum(-1)).to(torch.long)
 
             loss = nn.functional.cross_entropy(logits.view(-1,logits.size(2)), labels.flatten(), reduction="mean")
 
@@ -452,7 +455,9 @@ class Wav2Vec2ForFrameClassification(Wav2Vec2ForCTC):
 
    
 class Wav2Vec2ForCTCAndPretraining(Wav2Vec2ForPreTraining):
-    
+    '''
+    Implementation adapted from: https://huggingface.co/transformers/_modules/transformers/models/wav2vec2/modeling_wav2vec2.html#Wav2Vec2ForPreTraining
+    '''
     def __init__(self,config):
         super().__init__(config)
         

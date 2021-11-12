@@ -14,7 +14,7 @@
 ### Tutorial (In progress)
 You can directly run our model in the cloud via Google Colab!  
  - Forced alignment:   [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/lingjzhu/charsiu/blob/development/charsiu_forced_alignment_demo.ipynb)  
- - Textless alignmnet: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/lingjzhu/charsiu/blob/development/charsiu_textless_demo.ipynb)  
+ - Textless alignment: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/lingjzhu/charsiu/blob/development/charsiu_textless_demo.ipynb)  
 
 
 
@@ -25,8 +25,9 @@ You can directly run our model in the cloud via Google Colab!
 |     Items          | Progress |
 |:------------------:|:--------:|
 |  Documentation     | Nov 2021 |    
-|  Textgrid support  | Nov 2021 |
+|  Textgrid support  |     √    |
 | Model compression  |   TBD    |
+|  IPA support       |   TBD    |
 
  - Multilingual support
 
@@ -34,13 +35,13 @@ You can directly run our model in the cloud via Google Colab!
 |:------------------:|:--------:|
 | English (American) |     √    |
 |  Mandarin Chinese  | Nov 2021 |
-|       Spanish      | Dec 2021 |
+|       Spanish      | Jan 2022 |
 |  English (British) |    TBD   |
 |    Cantonese       |    TBD   |
 |    AAVE            |    TBD   |
 
 ### Pretrained models
-Our pretrained models are availble at the *HuggingFace* model hub: https://huggingface.co/charsiu.
+Our pretrained models are available at the *HuggingFace* model hub: https://huggingface.co/charsiu.
 
 
 ### Dependencies
@@ -50,6 +51,8 @@ datasets
 librosa  
 g2pe  
 praatio
+
+Training code is in `experiments/`. Those were original research code for training the model. They still need to be reorganized. 
 
 ### Training
 Coming soon!
@@ -82,7 +85,7 @@ To share a direct web link: https://github.com/lingjzhu/charsiu/.
 ### Disclaimer
 
 This tool is a beta version and is still under active development. It may have bugs and quirks, alongside the difficulties and provisos which are described throughout the documentation. 
-This tool is distributed under MIT liscence. Please see [license](https://github.com/lingjzhu/charsiu/blob/main/LICENSE) for details. 
+This tool is distributed under MIT license. Please see [license](https://github.com/lingjzhu/charsiu/blob/main/LICENSE) for details. 
 
 By using this tool, you acknowledge:
 
@@ -105,8 +108,8 @@ By using this tool, you acknowledge:
 All that said, thanks for using our tool, and we hope it works wonderfully for you!
 
 ### Support or Contact
-Please contact Jian Zhu (lingjzhu@umich.edu) for technical support.  
-Contact Cong Zhang (cong.zhang@ru.nl) if you would like to receive more instructions on how to use the package.
+Please contact Jian Zhu ([lingjzhu@umich.edu](lingjzhu@umich.edu)) for technical support.  
+Contact Cong Zhang ([cong.zhang@ru.nl](cong.zhang@ru.nl)) if you would like to receive more instructions on how to use the package.
 
 
 
