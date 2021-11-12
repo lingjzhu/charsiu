@@ -256,7 +256,7 @@ class charsiu_attention_aligner(charsiu_aligner):
     
 class charsiu_chain_attention_aligner(charsiu_aligner):
     
-    def __init__(self, aligner, **kwargs):
+    def __init__(self, aligner, recognizer, **kwargs):
         super(charsiu_chain_attention_aligner, self).__init__(**kwargs)
         self.aligner = Wav2Vec2ForAttentionAlignment.from_pretrained(aligner)
         self.recognizer = Wav2Vec2ForCTC.from_pretrained(recognizer)
@@ -341,9 +341,9 @@ class charsiu_chain_attention_aligner(charsiu_aligner):
 
 class charsiu_chain_forced_aligner(charsiu_aligner):
     
-    def __init__(self, aligner, **kwargs):
+    def __init__(self, aligner, recognizer, **kwargs):
         super(charsiu_chain_forced_aligner, self).__init__(**kwargs)
-        self.aligner = Wav2Vec2ForAttentionAlignment.from_pretrained(aligner)
+        self.aligner = Wav2Vec2ForFrameClassification.from_pretrained(aligner)
         self.recognizer = Wav2Vec2ForCTC.from_pretrained(recognizer)
         
         self._freeze_model()
@@ -448,7 +448,7 @@ class charsiu_predictive_aligner(charsiu_aligner):
             
         pred_ids = torch.argmax(out.logits.squeeze(),dim=-1)
         pred_ids = pred_ids.detach().cpu().numpy()
-        pred_phones = [self.charsiu_processor.mapping_id2phone(i) for i in pred_ids]
+        pred_phones = [self.charsiu_processor.mapping_id2phone(int(i)) for i in pred_ids]
         pred_phones = seq2duration(pred_phones,resolution=self.resolution)
         return pred_phones
     
@@ -490,6 +490,7 @@ if __name__ == "__main__":
     '''
     
     # initialize model
+    #charsiu = charsiu_forced_aligner(aligner='charsiu/en_w2v2_fc_10ms')
     charsiu = charsiu_attention_aligner(aligner='charsiu/en_w2v2_fs_10ms')
     
     # perform forced alignment
@@ -499,4 +500,12 @@ if __name__ == "__main__":
     charsiu.serve(audio='./local/SA1.WAV',text='She had your dark suit in greasy wash water all year.',
                   save_to='./local/SA1.TextGrid')
     
+    
+    # initialize model
+    charsiu = charsiu_chain_attention_aligner(aligner='charsiu/en_w2v2_fs_10ms',recognizer='charsiu/en_w2v2_ctc_libris_and_cv')
+    charsiu = charsiu_chain_forced_aligner(aligner='charsiu/en_w2v2_fc_10ms',recognizer='charsiu/en_w2v2_ctc_libris_and_cv')
+    charsiu = charsiu_predictive_aligner(aligner='charsiu/en_w2v2_fc_10ms')
+    
+    charsiu.align(audio='./local/SA1.WAV')
+    charsiu.serve(audio='./local/SA1.WAV', save_to='./local/SA1.TextGrid')
     
