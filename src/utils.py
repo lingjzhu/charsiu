@@ -18,56 +18,148 @@ from librosa.sequence import dtw
 from transformers import Wav2Vec2CTCTokenizer,Wav2Vec2FeatureExtractor, Wav2Vec2Processor
 
 
-dirname = os.path.dirname(__file__)
-vocabname = os.path.join(dirname, 'vocab-ctc.json')
-
-g2p = G2p()
-
-tokenizer = Wav2Vec2CTCTokenizer(vocabname, unk_token="[UNK]", pad_token="[PAD]", word_delimiter_token="")
-feature_extractor = Wav2Vec2FeatureExtractor(feature_size=1, sampling_rate=16000, padding_value=0.0, do_normalize=True, return_attention_mask=False)
-processor = Wav2Vec2Processor(feature_extractor=feature_extractor, tokenizer=tokenizer)
-
-mapping_phone2id = json.load(open(vocabname,'r'))
-mapping_id2phone = {v:k for k,v in mapping_phone2id.items()}
 
 
 
 
-
-def get_phones(sen):
-    '''
-    convert texts to phone sequence
-    '''
-    sen = g2p(sen)
-    sen = [re.sub(r'\d','',p) for p in sen]
-    return sen
-
-def get_phone_ids(phones):
-    '''
-    convert phone sequence to ids
-    '''
-    ids = []
-    punctuation = set('.,!?')
-    for p in phones:
-        if re.match(r'^\w+?$',p):
-            ids.append(mapping_phone2id.get(p,mapping_phone2id['[UNK]']))
-        elif p in punctuation:
-            ids.append(mapping_phone2id.get('[SIL]'))
-    ids = [0]+ids
-    if ids[-1]!=0:
-        ids.append(0)
-    return ids #append silence token at the beginning
-
-
-
-def audio_preprocess(path,sr=16000):
+class CharsiuPreprocessor:
     
-    if sr == 16000:    
-        features,fs = sf.read(path)
-        assert fs == 16000
-    else:
-        features, _ = librosa.core.load(path,sr=sr)
-    return processor(features, sampling_rate=16000,return_tensors='pt').input_values.squeeze()
+    def __init__(self):
+        
+        tokenizer = Wav2Vec2CTCTokenizer.from_pretrained('charsiu/tokenizer_en_cmu')
+        feature_extractor = Wav2Vec2FeatureExtractor(feature_size=1, sampling_rate=16000, padding_value=0.0, do_normalize=True, return_attention_mask=False)
+        self.processor = Wav2Vec2Processor(feature_extractor=feature_extractor, tokenizer=tokenizer)
+        self.g2p = G2p()
+
+    def get_phones(self,sen):
+        '''
+        Convert texts to phone sequence
+
+        Parameters
+        ----------
+        sen : str
+            A str of input sentence
+
+        Returns
+        -------
+        sen_clean : list
+            A list of phone sequence without stress marks
+        sen : list
+             A list of phone sequence with stress marks
+
+        '''     
+        
+        sen = self.g2p(sen)
+        sen = [re.sub(r'\d','',p) for p in sen]
+        return sen
+    
+    
+    def get_phones_and_words(self,sen):
+        '''
+        Incomplete
+        '''
+        phones = self.g2p(sen)
+        punctuation = set('.,!?')
+        
+        punc_mapping = {'.':' [SIL]', ',':' [SIL]', '!':' [SIL]', '?':' [SIL]'}
+        sen = re.sub(r'.,!?', ' [SIL]', sen)
+        sen = sen.split(' ')
+        return sen
+    
+    
+    def get_phone_ids(self,phones,append_silence=True):
+        '''
+        Convert phone sequence to ids
+
+        Parameters
+        ----------
+        phones : list
+            A list of phone sequence
+        append_silence : bool, optional
+            Whether silence is appended at the beginning and the end of the sequence. 
+            The default is True.
+
+        Returns
+        -------
+        list
+            A list of one-hot representations of phones
+
+        '''
+        ids = []
+        punctuation = set('.,!?')
+        for p in phones:
+            if re.match(r'^\w+?$',p):
+                ids.append(self.mapping_phone2id(p))
+            elif p in punctuation:
+                ids.append(self.mapping_phone2id('[SIL]'))
+        # append silence at the beginning and the end
+        if append_silence:
+            if ids[0]!=0:
+                ids = [0]+ids
+            if ids[-1]!=0:
+                ids.append(0)
+        return ids 
+    
+    def mapping_phone2id(self,phone):
+        '''
+        Convert a phone to a numerical id
+
+        Parameters
+        ----------
+        phone : str
+            A phonetic symbol
+
+        Returns
+        -------
+        int
+            A one-hot id for the input phone
+
+        '''
+        return self.processor.tokenizer.convert_tokens_to_ids(phone)
+    
+    def mapping_id2phone(self,idx):
+        '''
+        Convert a numerical id to a phone
+
+        Parameters
+        ----------
+        idx : int
+            A one-hot id for a phone
+
+        Returns
+        -------
+        str
+            A phonetic symbol
+
+        '''
+        return self.processor.tokenizer.convert_ids_to_tokens(idx)
+        
+    
+    def audio_preprocess(self,path,sr=16000):
+        '''
+        Load and normalize audio
+        If the sampling rate is incompatible with models, the input audio will be resampled.
+
+        Parameters
+        ----------
+        path : str
+            The path to the audio
+        sr : int, optional
+            Audio sampling rate. The default is 16000.
+
+        Returns
+        -------
+        torch.Tensor [(n,)]
+            A list of audio sample as an one dimensional torch tensor
+
+        '''
+        
+        if sr == 16000:    
+            features,fs = sf.read(path)
+            assert fs == 16000
+        else:
+            features, _ = librosa.core.load(path,sr=sr)
+        return self.processor(features, sampling_rate=16000,return_tensors='pt').input_values.squeeze()
 
 
 

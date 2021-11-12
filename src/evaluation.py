@@ -20,6 +20,10 @@ def evaluate_overlap(evaluation_pairs):
     return hits/counts
 
 
+'''
+Code for precision, recall, F1, R-value was adapted from unsupseg: https://github.com/felixkreuk/UnsupSeg
+'''
+
 def get_metrics(precision_counter, recall_counter, pred_counter, gt_counter):
     eps = 1e-7
 
