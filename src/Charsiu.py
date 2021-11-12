@@ -43,7 +43,7 @@ class charsiu_aligner:
             self.device = device
 
     
-    def freeze_model(self):
+    def _freeze_model(self):
         self.aligner.eval().to(self.device)
         if self.recognizer is not None:
             self.recognizer.eval().to(self.device)
@@ -107,7 +107,7 @@ class charsiu_forced_aligner(charsiu_aligner):
         super(charsiu_forced_aligner, self).__init__(**kwargs)
         self.aligner = Wav2Vec2ForFrameClassification.from_pretrained(aligner)
     
-        self.freeze_model()
+        self._freeze_model()
         
         
     def align(self, audio, text):
