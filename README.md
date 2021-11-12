@@ -6,7 +6,7 @@
 **Charsiu** is a phonetic alignment tool, which can:
 - recognise phonemes in a given audio file
 - perform forced alignment using phone transcriptions created in the previous step or provided by the user.
-- directly predict the phone-to-audio alignment from audio (text-independent alignment)
+- directly predict the phone-to-audio alignment from audio (text-independent alignment)  
 Pretrained models are available at the 🤗 *HuggingFace* model hub: https://huggingface.co/charsiu.
 
 **Fun fact**: Char Siu is one of the most representative dishes of Cantonese cuisine 🍲 (see [wiki](https://en.wikipedia.org/wiki/Char_siu)). 
