@@ -57,6 +57,7 @@ charsiu.serve(audio='./local/SA1.WAV', save_to='./local/SA1.TextGrid')
 |:------------------:|:--------:|
 |  Documentation     | Nov 2021 |    
 |  Textgrid support  |     √    |
+| Word Segmentation  | Dec 2021 |
 | Model compression  |   TBD    |
 |  IPA support       |   TBD    |
 
