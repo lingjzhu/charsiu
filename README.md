@@ -18,6 +18,7 @@ You can directly run our model in the cloud via Google Colab!
  - Forced alignment:   [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/lingjzhu/charsiu/blob/development/charsiu_forced_alignment_demo.ipynb)  
  - Textless alignment: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/lingjzhu/charsiu/blob/development/charsiu_textless_demo.ipynb)  
 
+### Usage
 ```
 git clone  https://github.com/lingjzhu/charsiu
 cd charsiu
