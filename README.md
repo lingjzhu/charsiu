@@ -25,8 +25,9 @@ You can directly run our model in the cloud via Google Colab!
 |     Items          | Progress |
 |:------------------:|:--------:|
 |  Documentation     | Nov 2021 |    
-|  Textgrid support  | Nov 2021 |
+|  Textgrid support  |     √    |
 | Model compression  |   TBD    |
+|  IPA support       |   TBD    |
 
  - Multilingual support
 
@@ -34,7 +35,7 @@ You can directly run our model in the cloud via Google Colab!
 |:------------------:|:--------:|
 | English (American) |     √    |
 |  Mandarin Chinese  | Nov 2021 |
-|       Spanish      | Dec 2021 |
+|       Spanish      | Jan 2022 |
 |  English (British) |    TBD   |
 |    Cantonese       |    TBD   |
 |    AAVE            |    TBD   |
@@ -50,6 +51,8 @@ datasets
 librosa  
 g2pe  
 praatio
+
+Training code is in `experiments/`. Those were original research code for training the model. They still need to be reorganized. 
 
 ### Training
 Coming soon!
