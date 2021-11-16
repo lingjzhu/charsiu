@@ -24,7 +24,7 @@ git clone  https://github.com/lingjzhu/charsiu
 cd charsiu
 ```
 #### Forced alignment
-```
+```Python
 from Charsiu import charsiu_forced_aligner
 
 # initialize model
@@ -38,7 +38,7 @@ charsiu.serve(audio='./local/SA1.WAV',text='She had your dark suit in greasy was
               save_to='./local/SA1.TextGrid')
 ```
 #### Textless alignment
-```
+```Python
 from Charsiu import charsiu_predictive_aligner
 
 # initialize model
