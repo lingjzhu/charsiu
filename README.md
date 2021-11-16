@@ -31,10 +31,12 @@ from Charsiu import charsiu_forced_aligner
 charsiu = charsiu_forced_aligner(aligner='charsiu/en_w2v2_fc_10ms')
 
 # perform forced alignment
-alignment = charsiu.align(audio='./local/SA1.WAV',text='She had your dark suit in greasy wash water all year.')
+alignment = charsiu.align(audio='./local/SA1.WAV',
+                          text='She had your dark suit in greasy wash water all year.')
 
 # perform forced alignment and save the output as a textgrid file
-charsiu.serve(audio='./local/SA1.WAV',text='She had your dark suit in greasy wash water all year.',
+charsiu.serve(audio='./local/SA1.WAV',
+              text='She had your dark suit in greasy wash water all year.',
               save_to='./local/SA1.TextGrid')
 ```
 #### Textless alignment
