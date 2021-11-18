@@ -86,10 +86,12 @@ librosa
 g2pe  
 praatio
 
-Training code is in `experiments/`. Those were original research code for training the model. They still need to be reorganized. 
+
 
 ### Training
 Coming soon!
+
+Note.Training code is in `experiments/`. Those were original research code for training the model. They still need to be reorganized. 
 
 ### Finetuning
 Coming soon!
