@@ -68,7 +68,7 @@ charsiu.serve(audio='./local/SA1.WAV', save_to='./local/SA1.TextGrid')
 |      Language      | Progress |
 |:------------------:|:--------:|
 | English (American) |     √    |
-|  Mandarin Chinese  | Nov 2021 |
+|  Mandarin Chinese  | Dec 2021 |
 |       Spanish      | Jan 2022 |
 |  English (British) |    TBD   |
 |    Cantonese       |    TBD   |
