@@ -14,7 +14,8 @@ Pretrained models are available at the 🤗 *HuggingFace* model hub: https://hug
 
 
 ### Tutorial 
-[!NEW] A step-by-step tutorial of how to install and run Charsiu is available: [![Open In Colab]
+[!NEW] A step-by-step tutorial for linguists: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/lingjzhu/charsiu/blob/development/charsiu_tutorial.ipynb)
+
 You can directly run our model in the cloud via Google Colab!  
  - Forced alignment:   [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/lingjzhu/charsiu/blob/development/charsiu_forced_alignment_demo.ipynb)  
  - Textless alignment: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/lingjzhu/charsiu/blob/development/charsiu_textless_demo.ipynb)  
