@@ -33,27 +33,42 @@ from Charsiu import charsiu_forced_aligner
 
 # initialize model
 charsiu = charsiu_forced_aligner(aligner='charsiu/en_w2v2_fc_10ms')
-
 # perform forced alignment
 alignment = charsiu.align(audio='./local/SA1.WAV',
                           text='She had your dark suit in greasy wash water all year.')
-
 # perform forced alignment and save the output as a textgrid file
 charsiu.serve(audio='./local/SA1.WAV',
               text='She had your dark suit in greasy wash water all year.',
               save_to='./local/SA1.TextGrid')
+
+
+# Chinese
+charsiu = charsiu_forced_aligner(aligner='charsiu/zh_w2v2_tiny_fc_10ms',lang='zh')
+charsiu.align(audio='./local/SSB00050015_16k.wav',text='经广州日报报道后成为了社会热点。')
+charsiu.serve(audio='./local/SSB00050015_16k.wav', text='经广州日报报道后成为了社会热点。',
+              save_to='./local/SSB00050015.TextGrid')
 ```
+
+
 #### Textless alignment
 ```Python
 from Charsiu import charsiu_predictive_aligner
-
-# initialize model
+# English
+# initialize a model
 charsiu = charsiu_predictive_aligner(aligner='charsiu/en_w2v2_fc_10ms')
 # perform textless alignment
 alignment = charsiu.align(audio='./local/SA1.WAV')
 # Or
 # perform textless alignment and output the results to a textgrid file
 charsiu.serve(audio='./local/SA1.WAV', save_to='./local/SA1.TextGrid')
+
+
+# Chinese
+charsiu = charsiu_predictive_aligner(aligner='charsiu/zh_w2v2_tiny_fc_10ms',lang='zh')
+
+charsiu.align(audio='./local/SSB16240001_16k.wav')
+# Or
+charsiu.serve(audio='./local/SSB16240001_16k.wav', save_to='./local/SSB16240001.TextGrid')
 ```
 ### Development plan
 

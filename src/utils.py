@@ -10,10 +10,11 @@ import re
 import json
 import soundfile as sf
 from g2p_en import G2p
+from g2pM import G2pM
 from tqdm import tqdm
 from praatio import textgrid
 from collections import defaultdict, Counter
-from itertools import groupby
+from itertools import groupby, chain
 from librosa.sequence import dtw
 from transformers import Wav2Vec2CTCTokenizer,Wav2Vec2FeatureExtractor, Wav2Vec2Processor
 
@@ -22,7 +23,7 @@ from transformers import Wav2Vec2CTCTokenizer,Wav2Vec2FeatureExtractor, Wav2Vec2
 
 
 
-class CharsiuPreprocessor:
+class CharsiuPreprocessor_en:
     
     def __init__(self):
         
@@ -30,7 +31,8 @@ class CharsiuPreprocessor:
         feature_extractor = Wav2Vec2FeatureExtractor(feature_size=1, sampling_rate=16000, padding_value=0.0, do_normalize=True, return_attention_mask=False)
         self.processor = Wav2Vec2Processor(feature_extractor=feature_extractor, tokenizer=tokenizer)
         self.g2p = G2p()
-
+        self.sil = self.mapping_phone2id('[SIL]')
+        
     def get_phones(self,sen):
         '''
         Convert texts to phone sequence
@@ -86,7 +88,7 @@ class CharsiuPreprocessor:
 
         '''
         ids = []
-        punctuation = set('.,!?')
+        punctuation = set('.,!?。，！？')
         for p in phones:
             if re.match(r'^\w+?$',p):
                 ids.append(self.mapping_phone2id(p))
@@ -94,10 +96,10 @@ class CharsiuPreprocessor:
                 ids.append(self.mapping_phone2id('[SIL]'))
         # append silence at the beginning and the end
         if append_silence:
-            if ids[0]!=0:
-                ids = [0]+ids
-            if ids[-1]!=0:
-                ids.append(0)
+            if ids[0]!=self.sil:
+                ids = [self.sil]+ids
+            if ids[-1]!=self.sil:
+                ids.append(self.sil)
         return ids 
     
     def mapping_phone2id(self,phone):
@@ -160,6 +162,84 @@ class CharsiuPreprocessor:
         else:
             features, _ = librosa.core.load(path,sr=sr)
         return self.processor(features, sampling_rate=16000,return_tensors='pt').input_values.squeeze()
+
+
+'''
+Object for Mandarin g2p processor
+'''
+
+
+consonant_list = set(['b', 'p', 'm', 'f', 'd', 't', 'n', 'l', 'g', 'k',
+                  'h', 'j', 'q', 'x', 'zh', 'ch', 'sh', 'r', 'z',
+                  'c', 's'])
+
+transform_dict = {'ju':'jv', 'qu':'qv', 'xu':'xv','jue':'jve',
+                  'que':'qve', 'xue':'xve','quan':'qvan',
+                  'xuan':'xvan','juan':'jvan',
+                  'qun':'qvn','xun':'xvn', 'jun':'jvn',
+                     'yuan':'van', 'yue':'ve', 'yun':'vn',
+                    'you':'iou', 'yan':'ian', 'yin':'in',
+                    'wa':'ua', 'wo':'uo', 'wai':'uai',
+                    'weng':'ueng', 'wang':'uang','wu':'u',
+                    'yu':'v','yi':'i','yo':'io','ya':'ia', 'ye':'ie', 
+                    'yao':'iao','yang':'iang', 'ying':'ing', 'yong':'iong',
+                    'yvan':'van', 'yve':'ve', 'yvn':'vn',
+                    'wa':'ua', 'wo':'uo', 'wai':'uai',
+                    'wei':'ui', 'wan':'uan', 'wen':'un', 
+                    'weng':'ueng', 'wang':'uang','yv':'v',
+                    'wuen':'un','wuo':'uo','wuang':'uang',
+                    'wuan':'uan','wua':'ua','wuai':'uai',
+                    'zhi':'zhiii','chi':'chiii','shi':'shiii',
+                    'zi':'zii','ci':'cii','si':'sii'}
+
+
+class CharsiuPreprocessor_zh(CharsiuPreprocessor_en):
+
+    def __init__(self):
+        tokenizer = Wav2Vec2CTCTokenizer.from_pretrained('charsiu/tokenizer_zh_pinyin')
+        feature_extractor = Wav2Vec2FeatureExtractor(feature_size=1, sampling_rate=16000, padding_value=0.0, do_normalize=True, return_attention_mask=False)
+        self.processor = Wav2Vec2Processor(feature_extractor=feature_extractor, tokenizer=tokenizer)
+        self.g2p = G2pM()
+        self.sil = self.mapping_phone2id('[SIL]')
+        
+    def get_phones(self,sen):
+        '''
+        Convert texts to phone sequence
+
+        Parameters
+        ----------
+        sen : str
+            A str of input sentence
+
+        Returns
+        -------
+        sen_clean : list
+            A list of phone sequence without stress marks
+        sen : list
+             A list of phone sequence with stress marks
+
+        '''     
+        
+        sen = self.g2p(sen)
+        sen = [self._separate_syllable(transform_dict.get(p[:-1],p[:-1])+p[-1]) if re.search(r'\w+\d',p) else p for p in sen ]
+        return list(chain.from_iterable(sen))
+
+    def _separate_syllable(self,syllable):
+        '''seprate syllable to consonant + ' ' + vowel '''
+        assert syllable[-1].isdigit()
+        if syllable == 'ri4':
+            return ('r','iii4')
+        if syllable[0:2] in consonant_list:
+            #return syllable[0:2].encode('utf-8'),syllable[2:].encode('utf-8')
+            return syllable[0:2], syllable[2:]
+        elif syllable[0] in consonant_list:
+            #return syllable[0].encode('utf-8'),syllable[1:].encode('utf-8')
+            return syllable[0], syllable[1:]
+        else:
+            #return (syllable.encode('utf-8'),)
+            return (syllable,)
+        
+
 
 
 
@@ -288,4 +368,34 @@ def forced_align(cost, phone_ids):
 
 
 if __name__ == '__main__':
-    pass
+    '''
+    Testing functions
+    '''    
+
+    processor = CharsiuPreprocessor_zh()
+    phones = processor.get_phones("鱼香肉丝、王道椒香鸡腿和川蜀鸡翅。")    
+    print(phones)
+    ids = processor.get_phone_ids(phones)
+    print(ids)
+
+    phones = processor.get_phones("这日绝对不行。")    
+    print(phones)
+    ids = processor.get_phone_ids(phones)
+    print(ids)
+
+    processor = CharsiuPreprocessor_en()
+    phones = processor.get_phones("charsiu phonetic aligner")    
+    print(phones)
+    ids = processor.get_phone_ids(phones)
+    print(ids)
+
+
+
+
+
+
+
+
+
+
+
