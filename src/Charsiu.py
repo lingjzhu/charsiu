@@ -9,10 +9,11 @@ from itertools import groupby
 sys.path.append('src/')
 #sys.path.insert(0,'src')
 from models import Wav2Vec2ForAttentionAlignment, Wav2Vec2ForFrameClassification, Wav2Vec2ForCTC
-from utils import CharsiuPreprocessor,seq2duration,forced_align,duration2textgrid
+from utils import CharsiuPreprocessor_zh,CharsiuPreprocessor_en,seq2duration,forced_align,duration2textgrid
 
 
-
+processors = {'zh':CharsiuPreprocessor_zh(),
+              'en':CharsiuPreprocessor_en()}
 
 class charsiu_aligner:
     
@@ -24,12 +25,14 @@ class charsiu_aligner:
                  processor=None, 
                  resolution=0.01):
                 
+        self.lang = lang # place holder
+        
         if processor is not None:
             self.processor = processor
         else:
-            self.charsiu_processor = CharsiuPreprocessor()
+            self.charsiu_processor = processors[self.lang]
         
-        self.lang = lang # place holder
+        
         
         self.resolution = resolution
         
@@ -509,3 +512,14 @@ if __name__ == "__main__":
     charsiu.align(audio='./local/SA1.WAV')
     charsiu.serve(audio='./local/SA1.WAV', save_to='./local/SA1.TextGrid')
     
+    
+    # Chinese models
+    charsiu = charsiu_predictive_aligner(aligner='charsiu/zh_w2v2_tiny_fc_10ms',lang='zh')
+    
+    charsiu.align(audio='./local/SSB00050015_16k.wav')
+    charsiu.serve(audio='./local/SSB00050015_16k.wav', save_to='./local/SSB00050015.TextGrid')
+    
+    charsiu = charsiu_forced_aligner(aligner='charsiu/zh_w2v2_tiny_fc_10ms',lang='zh')
+    charsiu.align(audio='./local/SSB00050015_16k.wav',text='经广州日报报道后成为了社会热点。')
+    charsiu.serve(audio='./local/SSB00050015_16k.wav', text='经广州日报报道后成为了社会热点。',
+                  save_to='./local/SSB00050015.TextGrid')
