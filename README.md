@@ -1,6 +1,8 @@
 ## Charsiu: A transformer-based phonetic aligner [[arXiv]](https://arxiv.org/abs/2110.03876)
 
-**Note.** This is a preview version. The aligner is under active development. New functions, new languages and detailed documentation will be added soon!
+**[UPDATE]** Mandarin models are available on the model hub. Tutorials will be updated soon!
+
+**Note.** The aligner is under active development. New functions, new languages and detailed documentation will be added soon! Give us a star if you like our project!
 
 ### Intro
 **Charsiu** is a phonetic alignment tool, which can:
@@ -26,21 +28,23 @@ git clone  https://github.com/lingjzhu/charsiu
 cd charsiu
 ```
 #### Forced alignment
-```
+```Python
 from Charsiu import charsiu_forced_aligner
 
 # initialize model
 charsiu = charsiu_forced_aligner(aligner='charsiu/en_w2v2_fc_10ms')
 
 # perform forced alignment
-alignment = charsiu.align(audio='./local/SA1.WAV',text='She had your dark suit in greasy wash water all year.')
+alignment = charsiu.align(audio='./local/SA1.WAV',
+                          text='She had your dark suit in greasy wash water all year.')
 
 # perform forced alignment and save the output as a textgrid file
-charsiu.serve(audio='./local/SA1.WAV',text='She had your dark suit in greasy wash water all year.',
+charsiu.serve(audio='./local/SA1.WAV',
+              text='She had your dark suit in greasy wash water all year.',
               save_to='./local/SA1.TextGrid')
 ```
 #### Textless alignment
-```
+```Python
 from Charsiu import charsiu_predictive_aligner
 
 # initialize model
@@ -59,6 +63,7 @@ charsiu.serve(audio='./local/SA1.WAV', save_to='./local/SA1.TextGrid')
 |:------------------:|:--------:|
 |  Documentation     | Nov 2021 |    
 |  Textgrid support  |     √    |
+| Word Segmentation  | Dec 2021 |
 | Model compression  |   TBD    |
 |  IPA support       |   TBD    |
 
@@ -67,7 +72,7 @@ charsiu.serve(audio='./local/SA1.WAV', save_to='./local/SA1.TextGrid')
 |      Language      | Progress |
 |:------------------:|:--------:|
 | English (American) |     √    |
-|  Mandarin Chinese  | Nov 2021 |
+|  Mandarin Chinese  |     √    |
 |       Spanish      | Jan 2022 |
 |  English (British) |    TBD   |
 |    Cantonese       |    TBD   |
@@ -85,10 +90,12 @@ librosa
 g2pe  
 praatio
 
-Training code is in `experiments/`. Those were original research code for training the model. They still need to be reorganized. 
+
 
 ### Training
 Coming soon!
+
+Note.Training code is in `experiments/`. Those were original research code for training the model. They still need to be reorganized. 
 
 ### Finetuning
 Coming soon!
