@@ -103,7 +103,7 @@ transformers
 datasets  
 librosa  
 g2pe  
-praatio
+praatio  
 g2pM
 
 
