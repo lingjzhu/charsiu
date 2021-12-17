@@ -104,7 +104,7 @@ datasets
 librosa  
 g2pe  
 praatio
-
+g2pM
 
 
 ### Training
