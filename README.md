@@ -64,7 +64,7 @@ charsiu.serve(audio='./local/SA1.WAV', save_to='./local/SA1.TextGrid')
 
 
 # Chinese
-charsiu = charsiu_predictive_aligner(aligner='charsiu/zh_w2v2_tiny_fc_10ms',lang='zh')
+charsiu = charsiu_predictive_aligner(aligner='charsiu/zh_xlsr_fc_10ms',lang='zh')
 
 charsiu.align(audio='./local/SSB16240001_16k.wav')
 # Or
