@@ -88,7 +88,8 @@ charsiu.serve(audio='./local/SSB16240001_16k.wav', save_to='./local/SSB16240001.
 |:------------------:|:--------:|
 | English (American) |     √    |
 |  Mandarin Chinese  |     √    |
-|       Spanish      | Jan 2022 |
+|       German       | Jan 2022 |
+|       Spanish      | Feb 2022 |
 |  English (British) |    TBD   |
 |    Cantonese       |    TBD   |
 |    AAVE            |    TBD   |
