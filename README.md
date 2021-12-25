@@ -1,6 +1,6 @@
 ## Charsiu: A transformer-based phonetic aligner [[arXiv]](https://arxiv.org/abs/2110.03876)
 
-**[UPDATE]** Mandarin models are available on the model hub. 
+**[UPDATE]** Mandarin models are now available on the model hub. 
 
 **Note.** The aligner is under active development. New functions, new languages and detailed documentation will be added soon! Give us a star if you like our project!
 
