@@ -365,6 +365,21 @@ def duration2textgrid(duration_seq,save_path=None):
 
 
 def get_boundaries(phone_seq):
+    """
+    Get time of phone boundaries
+
+    Parameters
+    ----------
+    phone_seq : list xxxx?
+        A list of phone sequence.
+
+    Returns
+    -------
+    timings: A list of time stamps
+    symbols: A list of phone symbols
+
+    """
+    
     boundaries = defaultdict(set)
     for s,e,p in phone_seq:
         boundaries[s].update([p.upper()])
