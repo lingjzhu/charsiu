@@ -229,6 +229,8 @@ class CharsiuPreprocessor_zh(CharsiuPreprocessor_en):
         assert syllable[-1].isdigit()
         if syllable == 'ri4':
             return ('r','iii4')
+        if syllable in er_mapping.keys():
+            return er_mapping[syllable]
         if syllable[0:2] in consonant_list:
             #return syllable[0:2].encode('utf-8'),syllable[2:].encode('utf-8')
             return syllable[0:2], syllable[2:]
@@ -240,7 +242,7 @@ class CharsiuPreprocessor_zh(CharsiuPreprocessor_en):
             return (syllable,)
         
 
-
+er_mapping ={'er1':('e1','rr'),'er2':('e2','rr'),'er3':('e3','rr'),'er4':('e4','rr'),'er5':('e5','rr')}
 
 
 def ctc2duration(phones,resolution=0.01):
@@ -378,7 +380,7 @@ if __name__ == '__main__':
     ids = processor.get_phone_ids(phones)
     print(ids)
 
-    phones = processor.get_phones("这日绝对不行。")    
+    phones = processor.get_phones("聚集 了 东郊 某 中学 的 学生 二十多 人。")    
     print(phones)
     ids = processor.get_phone_ids(phones)
     print(ids)
