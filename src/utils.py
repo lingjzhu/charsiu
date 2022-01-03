@@ -48,6 +48,9 @@ class CharsiuPreprocessor_en:
             A list of phone sequence without stress marks
         sen : list
              A list of phone sequence with stress marks
+             
+    
+        xxxxx should sen_clean be deleted?
 
         '''     
         
@@ -58,8 +61,19 @@ class CharsiuPreprocessor_en:
     
     def get_phones_and_words(self,sen):
         '''
-        Incomplete
+        Convert texts to words then to phone sequence
+
+        Parameters
+        ----------
+        sen : str
+            A str of input sentence
+
+        Returns
+        -------
+        sen : list
+             A list of phone sequence with stress marks
         '''
+        
         phones = self.g2p(sen)
         punctuation = set('.,!?')
         
@@ -83,10 +97,11 @@ class CharsiuPreprocessor_en:
 
         Returns
         -------
-        list
+        ids: list
             A list of one-hot representations of phones
 
         '''
+        
         ids = []
         punctuation = set('.,!?。，！？')
         for p in phones:
@@ -134,6 +149,7 @@ class CharsiuPreprocessor_en:
             A phonetic symbol
 
         '''
+        
         return self.processor.tokenizer.convert_ids_to_tokens(idx)
         
     
@@ -217,7 +233,8 @@ class CharsiuPreprocessor_zh(CharsiuPreprocessor_en):
             A list of phone sequence without stress marks
         sen : list
              A list of phone sequence with stress marks
-
+        
+        xxxxx should sen_clean be removed?
         '''     
         
         sen = self.g2p(sen)
@@ -225,7 +242,21 @@ class CharsiuPreprocessor_zh(CharsiuPreprocessor_en):
         return list(chain.from_iterable(sen))
 
     def _separate_syllable(self,syllable):
-        '''seprate syllable to consonant + ' ' + vowel '''
+        """
+        seprate syllable to consonant + ' ' + vowel
+
+        Parameters
+        ----------
+        syllable : xxxxx TYPE
+            xxxxx DESCRIPTION.
+
+        Returns
+        -------
+        syllable: xxxxx TYPE
+            xxxxxx DESCRIPTION.
+
+        """
+        
         assert syllable[-1].isdigit()
         if syllable == 'ri4':
             return ('r','iii4')
@@ -246,6 +277,23 @@ er_mapping ={'er1':('e1','rr'),'er2':('e2','rr'),'er3':('e3','rr'),'er4':('e4','
 
 
 def ctc2duration(phones,resolution=0.01):
+    """
+    xxxxx convert ctc to duration
+
+    Parameters
+    ----------
+    phones : list
+        A list of phone sequence
+    resolution : float, optional
+        The resolution of xxxxx. The default is 0.01.
+
+    Returns
+    -------
+    merged : list
+        xxxxx A list of duration values.
+
+    """
+    
     counter = 0
     out = []
     for p,group in groupby(phones):
@@ -265,6 +313,23 @@ def ctc2duration(phones,resolution=0.01):
 
 
 def seq2duration(phones,resolution=0.01):
+    """
+    xxxxx convert phone sequence to duration
+
+    Parameters
+    ----------
+    phones : list
+        A list of phone sequence
+    resolution : float, optional
+        The resolution of xxxxx. The default is 0.01.
+
+    Returns
+    -------
+    out : list
+        xxxxx A list of duration values.
+
+    """
+    
     counter = 0
     out = []
     for p,group in groupby(phones):
@@ -275,6 +340,23 @@ def seq2duration(phones,resolution=0.01):
 
 
 def duration2textgrid(duration_seq,save_path=None):
+    """
+    Save duration values to textgrids
+
+    Parameters
+    ----------
+    duration_seq : list
+        xxxxx A list of duration values.
+    save_path : str, optional
+        The path to save the TextGrid files. The default is None.
+
+    Returns
+    -------
+    tg : TextGrid file?? str?? xxxxx?
+        A textgrid object containing duration information.
+
+    """
+
     tg = textgrid.Textgrid()
     phoneTier = textgrid.IntervalTier('phones', duration_seq, 0, duration_seq[-1][1])
     tg.addTier(phoneTier)
@@ -285,6 +367,21 @@ def duration2textgrid(duration_seq,save_path=None):
 
 
 def get_boundaries(phone_seq):
+    """
+    Get time of phone boundaries
+
+    Parameters
+    ----------
+    phone_seq : list xxxx?
+        A list of phone sequence.
+
+    Returns
+    -------
+    timings: A list of time stamps
+    symbols: A list of phone symbols
+
+    """
+    
     boundaries = defaultdict(set)
     for s,e,p in phone_seq:
         boundaries[s].update([p.upper()])
