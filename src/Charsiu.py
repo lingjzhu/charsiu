@@ -520,6 +520,7 @@ if __name__ == "__main__":
     charsiu.serve(audio='./local/SSB00050015_16k.wav', save_to='./local/SSB00050015.TextGrid')
     
     charsiu = charsiu_forced_aligner(aligner='charsiu/zh_w2v2_tiny_fc_10ms',lang='zh')
-    charsiu.align(audio='./local/SSB00050015_16k.wav',text='经广州日报报道后成为了社会热点。')
+    charsiu.align(audio='/home/lukeum/Downloads/000001_16k.wav',text='卡尔普陪外孙玩滑梯。')
     charsiu.serve(audio='./local/SSB00050015_16k.wav', text='经广州日报报道后成为了社会热点。',
                   save_to='./local/SSB00050015.TextGrid')
+    charsiu.charsiu_processor.get_phones('卡尔普陪外孙玩滑梯。')
