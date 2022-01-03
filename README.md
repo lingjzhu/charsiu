@@ -1,6 +1,6 @@
 ## Charsiu: A transformer-based phonetic aligner [[arXiv]](https://arxiv.org/abs/2110.03876)
 
-**[UPDATE]** Mandarin models are available on the model hub. Tutorials will be updated soon!
+**[UPDATE]** Mandarin models are now available on the model hub. 
 
 **Note.** The aligner is under active development. New functions, new languages and detailed documentation will be added soon! Give us a star if you like our project!
 
@@ -64,7 +64,7 @@ charsiu.serve(audio='./local/SA1.WAV', save_to='./local/SA1.TextGrid')
 
 
 # Chinese
-charsiu = charsiu_predictive_aligner(aligner='charsiu/zh_w2v2_tiny_fc_10ms',lang='zh')
+charsiu = charsiu_predictive_aligner(aligner='charsiu/zh_xlsr_fc_10ms',lang='zh')
 
 charsiu.align(audio='./local/SSB16240001_16k.wav')
 # Or
@@ -88,7 +88,8 @@ charsiu.serve(audio='./local/SSB16240001_16k.wav', save_to='./local/SSB16240001.
 |:------------------:|:--------:|
 | English (American) |     √    |
 |  Mandarin Chinese  |     √    |
-|       Spanish      | Jan 2022 |
+|       German       | Jan 2022 |
+|       Spanish      | Feb 2022 |
 |  English (British) |    TBD   |
 |    Cantonese       |    TBD   |
 |    AAVE            |    TBD   |
@@ -103,8 +104,8 @@ transformers
 datasets  
 librosa  
 g2pe  
-praatio
-
+praatio  
+g2pM
 
 
 ### Training
