@@ -392,6 +392,24 @@ def get_boundaries(phone_seq):
 
 
 def check_textgrid_duration(textgrid,duration):
+    """
+    Check whether the duration of a textgrid file equals to 'duration'. 
+    If not, replace duration of the textgrid file.
+
+    Parameters
+    ----------
+    textgrid : .TextGrid object
+        A .TextGrid object.
+    duration : float
+        A given length of time.
+
+    Returns
+    -------
+    textgrid : .TextGrid object
+        A modified/unmodified textgrid.
+
+    """
+    
     
     endtime = textgrid.tierDict['phones'].entryList[-1].end
     if not endtime==duration:
@@ -402,6 +420,26 @@ def check_textgrid_duration(textgrid,duration):
     
 
 def textgrid_to_labels(phones,duration,resolution):
+    """
+    
+
+    Parameters
+    ----------
+    phones : list
+        A list of phone sequence
+    resolution : float, optional
+        The resolution of xxxxx. The default is 0.01.
+    duration : float
+        A given length of time.
+    
+
+    Returns
+    -------
+    labels : list
+        A list of phone labels.
+
+    """
+    
     labels = []
     clock = 0.0
 
