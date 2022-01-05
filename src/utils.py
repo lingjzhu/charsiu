@@ -463,6 +463,21 @@ def textgrid_to_labels(phones,duration,resolution):
     return labels
 
 def remove_null_and_numbers(labels):
+    """
+    Remove labels which are null, noise, or numbers.
+
+    Parameters
+    ----------
+    labels : list
+        A list of text labels.
+
+    Returns
+    -------
+    out : list
+        A list of new labels.
+
+    """
+    
     out = []
     noises = set(['SPN','NSN','LAU'])
     for l in labels:
@@ -479,6 +494,20 @@ def remove_null_and_numbers(labels):
 
 
 def insert_sil(phones):
+    """
+    Insert silences.
+
+    Parameters
+    ----------
+    phones : list
+        A list of phone sequence
+
+    Returns
+    -------
+    out : list
+        A list of new labels.
+
+    """
     
     out = []
     for i,(s,e,p) in enumerate(phones):
@@ -491,6 +520,23 @@ def insert_sil(phones):
 
 
 def forced_align(cost, phone_ids):
+    """
+    Force align text to audio.
+
+    Parameters
+    ----------
+    cost : float xxxxx
+        xxxxx.
+    phone_ids : list
+        A list of phone IDs.
+
+    Returns
+    -------
+    align_id : list
+        A list of IDs for aligned phones.
+
+    """
+    
     D,align = dtw(C=-cost[:,phone_ids])
 
     align_seq = [-1 for i in range(max(align[:,0])+1)]
