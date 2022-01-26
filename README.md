@@ -8,6 +8,7 @@
 - recognise phonemes in a given audio file
 - perform forced alignment using phone transcriptions created in the previous step or provided by the user.
 - directly predict the phone-to-audio alignment from audio (text-independent alignment)  
+
 The aligner is under active development. New functions, new languages and detailed documentation will be added soon! Give us a star if you like our project!
  
 Pretrained models are available at the 🤗 *HuggingFace* model hub: https://huggingface.co/charsiu.
