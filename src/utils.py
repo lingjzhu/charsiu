@@ -283,10 +283,7 @@ def insert_sil(phones):
 
 
 def forced_align(cost, phone_ids):
-<<<<<<< HEAD
-    D,align = dtw(C=-cost[:,phone_ids],
-                  step_sizes_sigma=np.array([[1, 1], [0, 1], [1, 0]]))
-=======
+
     """
     Force align text to audio.
 
@@ -304,8 +301,8 @@ def forced_align(cost, phone_ids):
 
     """
     
-    D,align = dtw(C=-cost[:,phone_ids])
->>>>>>> 0576940769c73f75541aeeb9ac07751054d9efc6
+    D,align = dtw(C=-cost[:,phone_ids],
+                  step_sizes_sigma=np.array([[1, 1], [0, 1], [1, 0]]))
 
     align_seq = [-1 for i in range(max(align[:,0])+1)]
     for i in list(align):
