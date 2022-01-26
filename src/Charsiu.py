@@ -9,11 +9,11 @@ from itertools import groupby
 sys.path.append('src/')
 #sys.path.insert(0,'src')
 from models import Wav2Vec2ForAttentionAlignment, Wav2Vec2ForFrameClassification, Wav2Vec2ForCTC
-from utils import CharsiuPreprocessor_zh,CharsiuPreprocessor_en,seq2duration,forced_align,duration2textgrid
+from utils import seq2duration,forced_align,duration2textgrid,word2textgrid
+from processors import CharsiuPreprocessor_zh, CharsiuPreprocessor_en
 
-
-processors = {'zh':CharsiuPreprocessor_zh(),
-              'en':CharsiuPreprocessor_en()}
+processors = {'zh':CharsiuPreprocessor_zh,
+              'en':CharsiuPreprocessor_en}
 
 class charsiu_aligner:
     
@@ -25,12 +25,12 @@ class charsiu_aligner:
                  processor=None, 
                  resolution=0.01):
                 
-        self.lang = lang # place holder
+        self.lang = lang 
         
         if processor is not None:
             self.processor = processor
         else:
-            self.charsiu_processor = processors[self.lang]
+            self.charsiu_processor = processors[self.lang]()
         
         
         
@@ -131,7 +131,7 @@ class charsiu_forced_aligner(charsiu_aligner):
         '''
         audio = self.charsiu_processor.audio_preprocess(audio,sr=self.sr)
         audio = torch.Tensor(audio).unsqueeze(0).to(self.device)
-        phones = self.charsiu_processor.get_phones(text)
+        phones, words = self.charsiu_processor.get_phones_and_words(text)
         phone_ids = self.charsiu_processor.get_phone_ids(phones)
 
         with torch.no_grad():
@@ -144,7 +144,8 @@ class charsiu_forced_aligner(charsiu_aligner):
         aligned_phones = [self.charsiu_processor.mapping_id2phone(phone_ids[i]) for i in aligned_phone_ids]
         pred_phones = seq2duration(aligned_phones,resolution=self.resolution)
         
-        return pred_phones
+        pred_words = self.charsiu_processor.align_words(pred_phones,phones,words)
+        return pred_phones, pred_words
     
     
     def serve(self,audio,text,save_to,output_format='textgrid'):
@@ -166,16 +167,42 @@ class charsiu_forced_aligner(charsiu_aligner):
         None.
     
         '''
-        aligned_phones = self.align(audio,text)
+        phones, words = self.align(audio,text)
 
-        if output_format == 'csv':
-            self._to_tsv(aligned_phones, save_to)
+        if output_format == 'tsv':
+            if save_to.endswith('.tsv'):
+                save_to_phone = save_to.replace('.tsv','_phone.tsv')
+                save_to_word = save_to.replace('.tsv','_word.tsv')
+            else:
+                save_to_phone = save_to + '_phone.tsv'
+                save_to_word = save_to + '_word.tsv'
+            
+            self._to_tsv(phones, save_to_phone)
+            self._to_tsv(words, save_to_words)
+            
         elif output_format == 'textgrid':
-            self._to_textgrid(aligned_phones, save_to)
+            self._to_textgrid(phones, words, save_to)
         else:
             raise Exception('Please specify the correct output format (tsv or textgird)!')    
 
+    def _to_textgrid(self,phones,words,save_to):
+        '''
+        Convert output tuples to a textgrid file
 
+        Parameters
+        ----------
+        phones : TYPE
+            DESCRIPTION.
+
+        Returns
+        -------
+        None.
+
+        '''
+        word2textgrid(phones,words,save_path=save_to)
+        print('Alignment output has been saved to %s'%(save_to))
+    
+    
 
 
 
@@ -207,7 +234,7 @@ class charsiu_attention_aligner(charsiu_aligner):
         '''
         audio = self.charsiu_processor.audio_preprocess(audio,sr=self.sr)
         audio = torch.Tensor(audio).unsqueeze(0).to(self.device)
-        phones = self.charsiu_processor.get_phones(text)
+        phones, words = self.charsiu_processor.get_phones_and_words(text)
         phone_ids = self.charsiu_processor.get_phone_ids(phones)
 
         
@@ -246,7 +273,7 @@ class charsiu_attention_aligner(charsiu_aligner):
         '''
         aligned_phones = self.align(audio,text)
 
-        if output_format == 'csv':
+        if output_format == 'tsv':
             self._to_tsv(aligned_phones, save_to)
         elif output_format == 'textgrid':
             self._to_textgrid(aligned_phones, save_to)
@@ -254,6 +281,25 @@ class charsiu_attention_aligner(charsiu_aligner):
             raise Exception('Please specify the correct output format (tsv or textgird)!')
     
     
+    def _to_textgrid(self,phones,save_to):
+        '''
+        Convert output tuples to a textgrid file
+
+        Parameters
+        ----------
+        phones : TYPE
+            DESCRIPTION.
+
+        Returns
+        -------
+        None.
+
+        '''
+        duration2textgrid(phones,save_path=save_to)
+        print('Alignment output has been saved to %s'%(save_to))
+    
+
+
     
     
     
@@ -333,7 +379,7 @@ class charsiu_chain_attention_aligner(charsiu_aligner):
         '''
         aligned_phones = self.align(audio)
 
-        if output_format == 'csv':
+        if output_format == 'tsv':
             self._to_tsv(aligned_phones, save_to)
         elif output_format == 'textgrid':
             self._to_textgrid(aligned_phones, save_to)
@@ -414,7 +460,7 @@ class charsiu_chain_forced_aligner(charsiu_aligner):
         '''
         aligned_phones = self.align(audio)
 
-        if output_format == 'csv':
+        if output_format == 'tsv':
             self._to_tsv(aligned_phones, save_to)
         elif output_format == 'textgrid':
             self._to_textgrid(aligned_phones, save_to)
@@ -478,7 +524,7 @@ class charsiu_predictive_aligner(charsiu_aligner):
         '''
         aligned_phones = self.align(audio)
 
-        if output_format == 'csv':
+        if output_format == 'tsv':
             self._to_tsv(aligned_phones, save_to)
         elif output_format == 'textgrid':
             self._to_textgrid(aligned_phones, save_to)
@@ -489,15 +535,15 @@ class charsiu_predictive_aligner(charsiu_aligner):
 if __name__ == "__main__":
     
     '''
-    Test 
+    Test code
     '''
     
     # initialize model
-    #charsiu = charsiu_forced_aligner(aligner='charsiu/en_w2v2_fc_10ms')
-    charsiu = charsiu_attention_aligner(aligner='charsiu/en_w2v2_fs_10ms')
+    charsiu = charsiu_forced_aligner(aligner='charsiu/en_w2v2_fc_10ms')
+    #charsiu = charsiu_attention_aligner(aligner='charsiu/en_w2v2_fs_10ms')
     
     # perform forced alignment
-    charsiu.align(audio='./local/SA1.WAV',text='She had your dark suit in greasy wash water all year.')
+    phones, words = charsiu.align(audio='./local/SA1.WAV',text='She had your dark suit in greasy wash water all year.')
     
     # perform forced alignment and save the output as a textgrid file
     charsiu.serve(audio='./local/SA1.WAV',text='She had your dark suit in greasy wash water all year.',
@@ -520,7 +566,17 @@ if __name__ == "__main__":
     charsiu.serve(audio='./local/SSB00050015_16k.wav', save_to='./local/SSB00050015.TextGrid')
     
     charsiu = charsiu_forced_aligner(aligner='charsiu/zh_w2v2_tiny_fc_10ms',lang='zh')
-    charsiu.align(audio='/home/lukeum/Downloads/000001_16k.wav',text='卡尔普陪外孙玩滑梯。')
+    phones, words = charsiu.align(audio='/home/lukeum/Downloads/000001_16k.wav',text='卡尔普陪外孙玩滑梯。')
     charsiu.serve(audio='./local/SSB00050015_16k.wav', text='经广州日报报道后成为了社会热点。',
                   save_to='./local/SSB00050015.TextGrid')
-    charsiu.charsiu_processor.get_phones('卡尔普陪外孙玩滑梯。')
+    
+
+
+
+
+    
+
+        
+            
+        
+    

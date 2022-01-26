@@ -78,7 +78,7 @@ charsiu.serve(audio='./local/SSB16240001_16k.wav', save_to='./local/SSB16240001.
 |:------------------:|:--------:|
 |  Documentation     | Nov 2021 |    
 |  Textgrid support  |     √    |
-| Word Segmentation  | Dec 2021 |
+| Word Segmentation  |     √    |
 | Model compression  |   TBD    |
 |  IPA support       |   TBD    |
 
