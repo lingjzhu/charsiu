@@ -1,15 +1,15 @@
 ## Charsiu: A transformer-based phonetic aligner [[arXiv]](https://arxiv.org/abs/2110.03876)
 
-**[UPDATE]** Mandarin models are now available on the model hub. 
+**[UPDATE]** Word alignment functionality has been added to `charsiu_forced_aligner` . This is only experimental and might not always work. We'll be improving it in the coming weeks.
 
-**Note.** The aligner is under active development. New functions, new languages and detailed documentation will be added soon! Give us a star if you like our project!
 
 ### Intro
 **Charsiu** is a phonetic alignment tool, which can:
 - recognise phonemes in a given audio file
 - perform forced alignment using phone transcriptions created in the previous step or provided by the user.
 - directly predict the phone-to-audio alignment from audio (text-independent alignment)  
-
+The aligner is under active development. New functions, new languages and detailed documentation will be added soon! Give us a star if you like our project!
+ 
 Pretrained models are available at the 🤗 *HuggingFace* model hub: https://huggingface.co/charsiu.
 
 **Fun fact**: Char Siu is one of the most representative dishes of Cantonese cuisine 🍲 (see [wiki](https://en.wikipedia.org/wiki/Char_siu)). 
