@@ -272,8 +272,14 @@ class CharsiuPreprocessor_zh(CharsiuPreprocessor_en):
                             'wuan':'uan','wua':'ua','wuai':'uai',
                             'zhi':'zhiii','chi':'chiii','shi':'shiii',
                             'zi':'zii','ci':'cii','si':'sii'}
-        self.er_mapping ={'er1':('e1','rr'),'er2':('e2','rr'),'er3':('e3','rr'),'er4':('e4','rr'),'er5':('e5','rr')}
-
+        self.er_mapping ={'er1':('e1','rr'),'er2':('e2','rr'),'er3':('e3','rr'),'er4':('e4','rr'),
+                          'er5':('e5','rr'),'r5':('e5','rr')}
+        self.rhyme_mapping = {'iu1':'iou1','iu2':'iou2','iu3':'iou3','iu4':'iou4','iu5':'iou5',
+                              'u:e1':'ve1','u:e2':'ve2','u:e3':'ve3','u:e4':'ve4','u:e5':'ve5',
+                              'u:1':'v1','u:2':'v2','u:3':'v3','u:4':'v4','u:5':'v5',
+                              'ueng1':('u1','eng1'),'ueng2':('u2','eng2'),'ueng3':('u3','eng3'),
+                              'ueng4':('u4','eng4'),'ueng5':('u5','eng5'),'io5':('i5','o5'),
+                              'io4':('i4','o4'),'io1':('i1','o1')}
         
     def get_phones_and_words(self,sen):
         '''
@@ -299,7 +305,7 @@ class CharsiuPreprocessor_zh(CharsiuPreprocessor_en):
         aligned_phones = []
         aligned_words = []
         for p,w in zip(phones,sen):
-            if re.search(r'\w+\d',p):
+            if re.search(r'\w+:?\d',p):
                 aligned_phones.append(self._separate_syllable(self.transform_dict.get(p[:-1],p[:-1])+p[-1]))
                 aligned_words.append(w)
             elif p in self.punctuation:
@@ -359,14 +365,16 @@ class CharsiuPreprocessor_zh(CharsiuPreprocessor_en):
         assert syllable[-1].isdigit()
         if syllable == 'ri4':
             return ('r','iii4')
+        if syllable[:-1] == 'ueng' or syllable[:-1] == 'io':
+            return self.rhyme_mapping.get(syllable,syllable)
         if syllable in self.er_mapping.keys():
             return self.er_mapping[syllable]
         if syllable[0:2] in self.consonant_list:
             #return syllable[0:2].encode('utf-8'),syllable[2:].encode('utf-8')
-            return syllable[0:2], syllable[2:]
+            return syllable[0:2], self.rhyme_mapping.get(syllable[2:],syllable[2:])
         elif syllable[0] in self.consonant_list:
             #return syllable[0].encode('utf-8'),syllable[1:].encode('utf-8')
-            return syllable[0], syllable[1:]
+            return syllable[0], self.rhyme_mapping.get(syllable[1:],syllable[1:])
         else:
             #return (syllable.encode('utf-8'),)
             return (syllable,)
@@ -387,6 +395,8 @@ class CharsiuPreprocessor_zh(CharsiuPreprocessor_en):
             else:
                 while dur[-1] != phones_rep[count]:
                     count += 1
+                    if count >= len(phones_rep):
+                        break
                 word_dur.append((dur,words_rep[count])) #((start,end,phone),word)
     
         # merge phone-to-word alignment to derive word duration

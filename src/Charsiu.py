@@ -538,31 +538,10 @@ if __name__ == "__main__":
     Test code
     '''
     
-    # initialize model
-    charsiu = charsiu_forced_aligner(aligner='charsiu/en_w2v2_fc_10ms')
-    #charsiu = charsiu_attention_aligner(aligner='charsiu/en_w2v2_fs_10ms')
-    
-    # perform forced alignment
-    phones, words = charsiu.align(audio='./local/SA1.WAV',text='She had your dark suit in greasy wash water all year.')
-    
-    # perform forced alignment and save the output as a textgrid file
-    charsiu.serve(audio='./local/SA1.WAV',text='She had your dark suit in greasy wash water all year.',
-                  save_to='./local/SA1.TextGrid')
-    
-    
-    # initialize model
-    charsiu = charsiu_chain_attention_aligner(aligner='charsiu/en_w2v2_fs_10ms',recognizer='charsiu/en_w2v2_ctc_libris_and_cv')
-    charsiu = charsiu_chain_forced_aligner(aligner='charsiu/en_w2v2_fc_10ms',recognizer='charsiu/en_w2v2_ctc_libris_and_cv')
-    charsiu = charsiu_predictive_aligner(aligner='charsiu/en_w2v2_fc_10ms')
-    
-    charsiu.align(audio='./local/SA1.WAV')
-    charsiu.serve(audio='./local/SA1.WAV', save_to='./local/SA1.TextGrid')
-    
-    
+
     # Chinese models
-    charsiu = charsiu_predictive_aligner(aligner='charsiu/zh_w2v2_tiny_fc_10ms',lang='zh')
-    
-    charsiu.align(audio='./local/SSB00050015_16k.wav')
+    charsiu = charsiu_predictive_aligner(aligner='charsiu/zh_xlsr_fc_10ms',lang='zh')
+    charsiu.align(audio=audio)
     charsiu.serve(audio='./local/SSB00050015_16k.wav', save_to='./local/SSB00050015.TextGrid')
     
     charsiu = charsiu_forced_aligner(aligner='charsiu/zh_w2v2_tiny_fc_10ms',lang='zh')
@@ -572,11 +551,4 @@ if __name__ == "__main__":
     
 
 
-
-
-    
-
-        
-            
-        
     
