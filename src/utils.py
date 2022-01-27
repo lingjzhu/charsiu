@@ -302,7 +302,7 @@ def forced_align(cost, phone_ids):
     """
     
     D,align = dtw(C=-cost[:,phone_ids],
-                  step_sizes_sigma=np.array([[1, 1], [0, 1], [1, 0]]))
+                  step_sizes_sigma=np.array([[1, 1], [1, 0]]))
 
     align_seq = [-1 for i in range(max(align[:,0])+1)]
     for i in list(align):
