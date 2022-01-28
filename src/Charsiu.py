@@ -106,7 +106,7 @@ class charsiu_aligner:
 
 class charsiu_forced_aligner(charsiu_aligner):
     
-    def __init__(self, aligner, sil_threshold=10, **kwargs):
+    def __init__(self, aligner, sil_threshold=4, **kwargs):
         super(charsiu_forced_aligner, self).__init__(**kwargs)
         self.aligner = Wav2Vec2ForFrameClassification.from_pretrained(aligner)
         self.sil_threshold = sil_threshold
@@ -139,33 +139,16 @@ class charsiu_forced_aligner(charsiu_aligner):
             out = self.aligner(audio)
         cost = torch.softmax(out.logits,dim=-1).detach().cpu().numpy().squeeze()
           
-
-        # single out silent intervals
-        preds = np.argmax(cost,axis=-1)
-        sil_mask = []
-        for key, group in groupby(preds):
-            group = list(group)
-            if  (key==1 and len(group)<=self.sil_threshold):
-                sil_mask += [0 for i in range(len(group))]
-            else:
-                sil_mask += group
-        sil_mask = np.array(sil_mask)
-        nonsil_idx = np.argwhere(sil_mask!=1).squeeze()
+        
+        sil_mask = self._get_sil_mask(cost)
+        
+        nonsil_idx = np.argwhere(sil_mask!=self.charsiu_processor.sil_idx).squeeze()
         
         aligned_phone_ids = forced_align(cost[nonsil_idx,:],phone_ids[1:-1])
         
         aligned_phones = [self.charsiu_processor.mapping_id2phone(phone_ids[1:-1][i]) for i in aligned_phone_ids]
-            # merge silent and non-silent intervals
-        pred_phones = []
-        count = 0
-        for i in sil_mask:
-            if i==1:
-                pred_phones.append('[SIL]')
-            else:
-                pred_phones.append(aligned_phones[count])
-                count += 1
-        assert len(pred_phones) == len(preds)
         
+        pred_phones = self._merge_silence(aligned_phones,sil_mask)
         
         pred_phones = seq2duration(pred_phones,resolution=self.resolution)
         
@@ -227,9 +210,36 @@ class charsiu_forced_aligner(charsiu_aligner):
         word2textgrid(phones,words,save_path=save_to)
         print('Alignment output has been saved to %s'%(save_to))
     
+
+    def _merge_silence(self,aligned_phones,sil_mask):
+        # merge silent and non-silent intervals
+        pred_phones = []
+        count = 0
+        for i in sil_mask:
+            if i==self.charsiu_processor.sil_idx:
+                pred_phones.append('[SIL]')
+            else:
+                pred_phones.append(aligned_phones[count])
+                count += 1
+        assert len(pred_phones) == len(sil_mask)
+        return pred_phones
+
+
+  
+    def _get_sil_mask(self,cost):
+        # single out silent intervals
+        
+        preds = np.argmax(cost,axis=-1)
+        sil_mask = []
+        for key, group in groupby(preds):
+            group = list(group)
+            if  (key==self.charsiu_processor.sil_idx and len(group)<self.sil_threshold):
+                sil_mask += [-1 for i in range(len(group))]
+            else:
+                sil_mask += group
+
+        return np.array(sil_mask)
     
-
-
 
 class charsiu_attention_aligner(charsiu_aligner):
     
@@ -577,9 +587,3 @@ if __name__ == "__main__":
     charsiu.serve(audio='./local/SSB00050015_16k.wav', text='经广州日报报道后成为了社会热点。',
                   save_to='./local/SSB00050015.TextGrid')
     
-
-    audio = '/mnt/exp/data_aishell/wav/train/S0104/BAC009S0104W0126.wav'
-    text = '二线 城市 购入 土地 二千 九百五十九 万平 米'
-
-    charsiu.serve(audio=audio, text=text,
-              save_to='./local/sample.TextGrid')
