@@ -107,8 +107,9 @@ class CharsiuPreprocessor_en(CharsiuPreprocessor):
         self.g2p = G2p()
         self.sil = '[SIL]'
         self.sil_idx = self.mapping_phone2id(self.sil)
-        self.punctuation = set('.,!?')
-        
+#        self.punctuation = set('.,!?')
+        self.punctuation = set()        
+
     def get_phones_and_words(self,sen):
         '''
         Convert texts to phone sequence
@@ -135,8 +136,19 @@ class CharsiuPreprocessor_en(CharsiuPreprocessor):
     
         phones = list(tuple(g) for k,g in groupby(phones, key=lambda x: x != ' ') if k)  
         
-        phones = [p if p[0] not in self.punctuation else (self.sil,) for p in phones]
-        words = [w if w not in self.punctuation else self.sil for w in words]
+        aligned_phones = []
+        aligned_words = []
+        for p,w in zip(phones,words):
+            if re.search(r'\w+\d?',p[0]):
+                aligned_phones.append(p)
+                aligned_words.append(w)
+            elif p in self.punctuation:
+                aligned_phones.append((self.sil,))
+                aligned_words.append(self.sil)
+        
+        assert len(aligned_words) == len(aligned_phones)
+        
+        return aligned_phones, aligned_words
         
         assert len(words) == len(phones)
         
@@ -247,8 +259,8 @@ class CharsiuPreprocessor_zh(CharsiuPreprocessor_en):
         self.g2p = G2pM()
         self.sil = "[SIL]"
         self.sil_idx = self.mapping_phone2id(self.sil)
-        self.punctuation = set('.,!?。，！？、')
-        
+        #self.punctuation = set('.,!?。，！？、')
+        self.punctuation = set()  
         # Pinyin tables
         self.consonant_list = set(['b', 'p', 'm', 'f', 'd', 't', 'n', 'l', 'g', 'k',
                   'h', 'j', 'q', 'x', 'zh', 'ch', 'sh', 'r', 'z',

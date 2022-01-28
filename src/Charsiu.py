@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 
 
-import re
 import sys
 import torch
 from itertools import groupby
 sys.path.append('src/')
+import numpy as np
 #sys.path.insert(0,'src')
 from models import Wav2Vec2ForAttentionAlignment, Wav2Vec2ForFrameClassification, Wav2Vec2ForCTC
 from utils import seq2duration,forced_align,duration2textgrid,word2textgrid
@@ -106,10 +106,11 @@ class charsiu_aligner:
 
 class charsiu_forced_aligner(charsiu_aligner):
     
-    def __init__(self, aligner, **kwargs):
+    def __init__(self, aligner, sil_threshold=4, **kwargs):
         super(charsiu_forced_aligner, self).__init__(**kwargs)
         self.aligner = Wav2Vec2ForFrameClassification.from_pretrained(aligner)
-    
+        self.sil_threshold = sil_threshold
+        
         self._freeze_model()
         
         
@@ -138,11 +139,18 @@ class charsiu_forced_aligner(charsiu_aligner):
             out = self.aligner(audio)
         cost = torch.softmax(out.logits,dim=-1).detach().cpu().numpy().squeeze()
           
-
-        aligned_phone_ids = forced_align(cost,phone_ids)
         
-        aligned_phones = [self.charsiu_processor.mapping_id2phone(phone_ids[i]) for i in aligned_phone_ids]
-        pred_phones = seq2duration(aligned_phones,resolution=self.resolution)
+        sil_mask = self._get_sil_mask(cost)
+        
+        nonsil_idx = np.argwhere(sil_mask!=self.charsiu_processor.sil_idx).squeeze()
+        
+        aligned_phone_ids = forced_align(cost[nonsil_idx,:],phone_ids[1:-1])
+        
+        aligned_phones = [self.charsiu_processor.mapping_id2phone(phone_ids[1:-1][i]) for i in aligned_phone_ids]
+        
+        pred_phones = self._merge_silence(aligned_phones,sil_mask)
+        
+        pred_phones = seq2duration(pred_phones,resolution=self.resolution)
         
         pred_words = self.charsiu_processor.align_words(pred_phones,phones,words)
         return pred_phones, pred_words
@@ -178,7 +186,7 @@ class charsiu_forced_aligner(charsiu_aligner):
                 save_to_word = save_to + '_word.tsv'
             
             self._to_tsv(phones, save_to_phone)
-            self._to_tsv(words, save_to_words)
+            self._to_tsv(words, save_to_word)
             
         elif output_format == 'textgrid':
             self._to_textgrid(phones, words, save_to)
@@ -202,9 +210,36 @@ class charsiu_forced_aligner(charsiu_aligner):
         word2textgrid(phones,words,save_path=save_to)
         print('Alignment output has been saved to %s'%(save_to))
     
+
+    def _merge_silence(self,aligned_phones,sil_mask):
+        # merge silent and non-silent intervals
+        pred_phones = []
+        count = 0
+        for i in sil_mask:
+            if i==self.charsiu_processor.sil_idx:
+                pred_phones.append('[SIL]')
+            else:
+                pred_phones.append(aligned_phones[count])
+                count += 1
+        assert len(pred_phones) == len(sil_mask)
+        return pred_phones
+
+
+  
+    def _get_sil_mask(self,cost):
+        # single out silent intervals
+        
+        preds = np.argmax(cost,axis=-1)
+        sil_mask = []
+        for key, group in groupby(preds):
+            group = list(group)
+            if  (key==self.charsiu_processor.sil_idx and len(group)<self.sil_threshold):
+                sil_mask += [-1 for i in range(len(group))]
+            else:
+                sil_mask += group
+
+        return np.array(sil_mask)
     
-
-
 
 class charsiu_attention_aligner(charsiu_aligner):
     
@@ -537,7 +572,10 @@ if __name__ == "__main__":
     '''
     Test code
     '''
-    
+    charsiu = charsiu_forced_aligner(aligner='charsiu/en_w2v2_fc_10ms')
+    # perform forced alignment
+    alignment = charsiu.align(audio='./local/SA1.WAV',
+                              text='She had your dark suit in greasy wash water all year.')
 
     # Chinese models
     charsiu = charsiu_predictive_aligner(aligner='charsiu/zh_xlsr_fc_10ms',lang='zh')
@@ -548,7 +586,4 @@ if __name__ == "__main__":
     phones, words = charsiu.align(audio='/home/lukeum/Downloads/000001_16k.wav',text='卡尔普陪外孙玩滑梯。')
     charsiu.serve(audio='./local/SSB00050015_16k.wav', text='经广州日报报道后成为了社会热点。',
                   save_to='./local/SSB00050015.TextGrid')
-    
-
-
     
