@@ -17,7 +17,7 @@ The aligner is under active development. New functions, new languages and detail
 ### Table of content
 - [Tutorial](README.md#Tutorial)  
 - [Usage](README.md#Usage)  
-- [Pretrained models]()
+- [Pretrained models](README.md#Pretrained-models)
 - [Development plan](README.md#Development-plan)  
 - [Dependencies](README.md#Dependencies)  
 - [Training](README.md#Training)  
