@@ -4,7 +4,7 @@ This repository contains phone- and word-level alignments for multiple Mandarin 
 
 You can download all textgrids [here](https://drive.google.com/drive/folders/1IF0WB5-8VXfaENtE4r5rehHHK8YFe61S?usp=sharing). The forced alignment was done with [Charsiu Forced Aligner](https://github.com/lingjzhu/charsiu). Please cite this tool if you use these alignments in your research projects.
 
-Only Praat textgrid files are distributed. Misaligned files were discarded. Forced alignment do not provide perfect alignments. **Use at you own discrection**.
+Only Praat textgrid files are distributed. Sentences with Englist letters and numbers were all removed. Misaligned files were also discarded. Forced alignment do not provide perfect alignments. **Use at you own discrection**.
 
 The original audio data can be downloaded via OpenSLR. All filenames are matched. Please also cite the original datasets. 
 
