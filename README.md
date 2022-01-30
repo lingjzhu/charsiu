@@ -10,11 +10,23 @@
 - perform forced alignment using phone transcriptions created in the previous step or provided by the user.
 - directly predict the phone-to-audio alignment from audio (text-independent alignment)  
 
-The aligner is under active development. New functions, new languages and detailed documentation will be added soon! Give us a star if you like our project!
- 
-Pretrained models are available at the 🤗 *HuggingFace* model hub: https://huggingface.co/charsiu.
-
+The aligner is under active development. New functions, new languages and detailed documentation will be added soon! Give us a star if you like our project!  
 **Fun fact**: Char Siu is one of the most representative dishes of Cantonese cuisine 🍲 (see [wiki](https://en.wikipedia.org/wiki/Char_siu)). 
+
+
+### Table of content
+- [Tutorial](README.md#Tutorial)  
+- [Usage](README.md#Usage)  
+- [Pretrained models](README.md#Pretrained-models)
+- [Development plan](README.md#Development-plan)  
+- [Dependencies](README.md#Dependencies)  
+- [Training](README.md#Training)  
+- [Attribution and Citation](README.md#attribution-and-citation)  
+- [References](README.md#References)  
+- [Disclaimer](README.md#Disclaimer)  
+- [Support or Contact](README.md#support-or-contact)
+
+
 
 
 ### Tutorial 
@@ -72,6 +84,11 @@ charsiu.align(audio='./local/SSB16240001_16k.wav')
 # Or
 charsiu.serve(audio='./local/SSB16240001_16k.wav', save_to='./local/SSB16240001.TextGrid')
 ```
+
+### Pretrained models  
+Pretrained models are available at the 🤗 *HuggingFace* model hub: https://huggingface.co/charsiu.
+
+
 ### Development plan
 
  - Package  
@@ -111,12 +128,10 @@ g2pM
 
 
 ### Training
-Coming soon!
+The training pipeline is coming soon!
 
 Note.Training code is in `experiments/`. Those were original research code for training the model. They still need to be reorganized. 
 
-### Finetuning
-Coming soon!
 
 ### Attribution and Citation
 For now, you can cite this tool as:
