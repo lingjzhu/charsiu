@@ -6,14 +6,14 @@ You can download all textgrids [here](https://drive.google.com/drive/folders/1IF
 
 Only Praat textgrid files are distributed here. The original audio data can be downloaded via OpenSLR. All filenames are matched. Please also cite the original datasets. 
 
-Aishell-1: https://openslr.org/33/
+Aishell-1 (~150 hours): https://openslr.org/33/
 
-MagicData: https://openslr.org/68/
+MagicData (~755 hours): https://openslr.org/68/
 
-Datatang: https://openslr.org/62/
+Datatang (~200 hours): https://openslr.org/62/
 
-STCMDS: https://openslr.org/38/
+STCMDS (~100 hours): https://openslr.org/38/
 
-PrimeWords: https://openslr.org/47/
+PrimeWords (~100 hours): https://openslr.org/47/
 
-THCHS-30: https://openslr.org/18/
+THCHS-30 (~30 hours): https://openslr.org/18/
