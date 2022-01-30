@@ -1,5 +1,6 @@
 ## Charsiu: A transformer-based phonetic aligner [[arXiv]](https://arxiv.org/abs/2110.03876)
 
+**[UPDATE]** 1.31.2022. We release phone- and word-level alignments for over a million Mandarin utterances. Check out [this link](misc/data.md).  
 **[UPDATE]** 1.26.2022. Word alignment functionality has been added to `charsiu_forced_aligner` . This is only experimental and might not always work.   We'll be improving it in the coming weeks.
 
 
