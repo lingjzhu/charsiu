@@ -15,9 +15,17 @@ The aligner is under active development. New functions, new languages and detail
 
 
 ### Table of content
-- [Tutorial](README.md#Tutorial)
- 
-Pretrained models are available at the 🤗 *HuggingFace* model hub: https://huggingface.co/charsiu.
+- [Tutorial](README.md#Tutorial)  
+- [Usage](README.md#Usage)  
+- [Pretrained models]()
+- [Development plan](README.md#Development-plan)  
+- [Dependencies](README.md#Dependencies)  
+- [Training](README.md#Training)  
+- [Attribution and Citation](README.md#attribution-and-citation)  
+- [References](README.md#References)  
+- [Disclaimer](README.md#Disclaimer)  
+- [Support or Contact](README.md#support-or-contact)
+
 
 
 
@@ -76,6 +84,11 @@ charsiu.align(audio='./local/SSB16240001_16k.wav')
 # Or
 charsiu.serve(audio='./local/SSB16240001_16k.wav', save_to='./local/SSB16240001.TextGrid')
 ```
+
+### Pretrained models  
+Pretrained models are available at the 🤗 *HuggingFace* model hub: https://huggingface.co/charsiu.
+
+
 ### Development plan
 
  - Package  
@@ -115,12 +128,10 @@ g2pM
 
 
 ### Training
-Coming soon!
+The training pipeline is coming soon!
 
 Note.Training code is in `experiments/`. Those were original research code for training the model. They still need to be reorganized. 
 
-### Finetuning
-Coming soon!
 
 ### Attribution and Citation
 For now, you can cite this tool as:
