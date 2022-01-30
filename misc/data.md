@@ -1,6 +1,6 @@
 ## Alignments for several Mandarin Speech datasets
 
-This repository contains phone- and word-level alignments for multiple Mandarin Chinese speech datasets, including MagicData, Aishell-1, STCMDS, Datatang, THCHS-30 and PrimeWords.
+This repository contains phone- and word-level alignments for multiple Mandarin Chinese speech datasets, including MagicData (~755 hours), Aishell-1 (~150 hours), STCMDS (~100 hours), Datatang (~200 hours), THCHS-30 (~20 hours) and PrimeWords (~100 hours).
 
 You can download all textgrids [here](https://drive.google.com/drive/folders/1IF0WB5-8VXfaENtE4r5rehHHK8YFe61S?usp=sharing). The forced alignment was done with [Charsiu Forced Aligner](https://github.com/lingjzhu/charsiu). Please cite this tool if you use these alignments in your research projects.
 ```
