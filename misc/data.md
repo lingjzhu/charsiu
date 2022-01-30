@@ -1,4 +1,4 @@
-## Alignments for several Mandarin Speech datasets
+## Alignments for Mandarin Speech datasets
 
 This repository contains phone- and word-level alignments for multiple Mandarin Chinese speech datasets, including MagicData (~755 hours), Aishell-1 (~150 hours), STCMDS (~100 hours), Datatang (~200 hours), THCHS-30 (~20 hours) and PrimeWords (~100 hours).
 
