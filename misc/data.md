@@ -2,7 +2,7 @@
 
 This repository contains phone- and word-level alignments for multiple Mandarin Chinese speech datasets, including MagicData, Aishell-1, STCMDS, Datatang, THCHS-30 and PrimeWords.
 
-The forced alignment was done with Charsiu Forced Aligner: https://github.com/lingjzhu/charsiu. Please cite this tool if you use these alignments in your research projects.
+You can download all textgrids [here](https://drive.google.com/drive/folders/1IF0WB5-8VXfaENtE4r5rehHHK8YFe61S?usp=sharing). The forced alignment was done with [Charsiu Forced Aligner](https://github.com/lingjzhu/charsiu). Please cite this tool if you use these alignments in your research projects.
 
 Only Praat textgrid files are distributed here. The original audio data can be downloaded via OpenSLR. All filenames are matched. Please also cite the original datasets. 
 
