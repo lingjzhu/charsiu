@@ -138,7 +138,7 @@ Note.Training code is in `experiments/`. Those were original research code for t
 For now, you can cite this tool as:
 
 ```
-@article{zhu2019charsiu,
+@article{zhu2022charsiu,
   title={Phone-to-audio alignment without text: A Semi-supervised Approach},
   author={Zhu, Jian and Zhang, Cong and Jurgens, David},
   journal={IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)},
