@@ -2,7 +2,7 @@
 
 ### Updates
 - 1.31.2022. We release phone- and word-level alignments for over a million Mandarin utterances. Check out [this link](misc/data.md).  
-- 1.26.2022. Word alignment functionality has been added to `charsiu_forced_aligner` . This is only experimental.   We'll be improving it in the coming weeks.
+- 1.26.2022. Word alignment functionality has been added to `charsiu_forced_aligner` .
 
 ### Intro
 **Charsiu** is a phonetic alignment tool, which can:
