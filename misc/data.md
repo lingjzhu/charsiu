@@ -7,7 +7,7 @@ You can download all textgrids [here](https://drive.google.com/drive/folders/1IF
 
 Please cite this if you use these alignments in your research projects.
 ```
-@article{zhu2019charsiu,
+@article{zhu2022charsiu,
   title={Phone-to-audio alignment without text: A Semi-supervised Approach},
   author={Zhu, Jian and Zhang, Cong and Jurgens, David},
   journal={IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)},
