@@ -62,6 +62,11 @@ charsiu = charsiu_forced_aligner(aligner='charsiu/zh_w2v2_tiny_fc_10ms',lang='zh
 charsiu.align(audio='./local/SSB00050015_16k.wav',text='经广州日报报道后成为了社会热点。')
 charsiu.serve(audio='./local/SSB00050015_16k.wav', text='经广州日报报道后成为了社会热点。',
               save_to='./local/SSB00050015.TextGrid')
+              
+# An numpy array of speech signal can also be passed to the model.
+import soundfile as sf
+y, sr = sf.read('./local/SSB00050015_16k.wav')
+charsiu.align(audio=y,text='经广州日报报道后成为了社会热点。')
 ```
 
 
