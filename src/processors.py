@@ -3,6 +3,7 @@
 
 
 import re
+import numpy as np
 from itertools import groupby, chain
 import soundfile as sf
 import librosa.core
@@ -68,7 +69,7 @@ class CharsiuPreprocessor:
         return self.processor.tokenizer.convert_ids_to_tokens(idx)
         
     
-    def audio_preprocess(self,path,sr=16000):
+    def audio_preprocess(self,audio,sr=16000):
         '''
         Load and normalize audio
         If the sampling rate is incompatible with models, the input audio will be resampled.
@@ -86,12 +87,16 @@ class CharsiuPreprocessor:
             A list of audio sample as an one dimensional torch tensor
 
         '''
-        
-        if sr == 16000:    
-            features,fs = sf.read(path)
-            assert fs == 16000
+        if type(audio)==str:
+            if sr == 16000:    
+                features,fs = sf.read(audio)
+                assert fs == 16000
+            else:
+                features, _ = librosa.core.load(audio,sr=sr)
+        elif isinstance(audio, np.ndarray):
+            features = audio
         else:
-            features, _ = librosa.core.load(path,sr=sr)
+            raise Exception('The input must be a path or a numpy array!')
         return self.processor(features, sampling_rate=16000,return_tensors='pt').input_values.squeeze()
 
 '''

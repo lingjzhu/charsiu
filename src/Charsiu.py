@@ -143,6 +143,8 @@ class charsiu_forced_aligner(charsiu_aligner):
         sil_mask = self._get_sil_mask(cost)
         
         nonsil_idx = np.argwhere(sil_mask!=self.charsiu_processor.sil_idx).squeeze()
+        if nonsil_idx is None:
+            raise Exception("No speech detected! Please check the audio file!")
         
         aligned_phone_ids = forced_align(cost[nonsil_idx,:],phone_ids[1:-1])
         
@@ -583,7 +585,8 @@ if __name__ == "__main__":
     charsiu.serve(audio='./local/SSB00050015_16k.wav', save_to='./local/SSB00050015.TextGrid')
     
     charsiu = charsiu_forced_aligner(aligner='charsiu/zh_w2v2_tiny_fc_10ms',lang='zh')
-    phones, words = charsiu.align(audio='/home/lukeum/Downloads/000001_16k.wav',text='卡尔普陪外孙玩滑梯。')
+    audio, sr = sf.read('/home/lukeum/Downloads/000001_16k.wav')
+    phones, words = charsiu.align(audio=audio,text='卡尔普陪外孙玩滑梯。')
     charsiu.serve(audio='./local/SSB00050015_16k.wav', text='经广州日报报道后成为了社会热点。',
                   save_to='./local/SSB00050015.TextGrid')
     
