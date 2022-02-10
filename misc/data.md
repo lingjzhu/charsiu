@@ -2,8 +2,8 @@
 
 Here we release several datasets that have been forced aligned with [Charsiu Forced Aligner](https://github.com/lingjzhu/charsiu). Hoepfully they might be helpful for your research. 
 Forced alignment does not generate perfect alignments. **Use at you own discrection**.  
-[English](misc/data.md#alignments-for-english-datasets)  
-[Mandarin](misc/data.md#alignments-for-mandarin-speech-datasets)  
+[English](data.md#alignments-for-english-datasets)  
+[Mandarin](data.md#alignments-for-mandarin-speech-datasets)  
 
 
 Please cite this if you use these alignments in your research projects.
