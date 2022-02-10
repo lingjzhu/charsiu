@@ -1,9 +1,9 @@
 # Forced-aligned Datasets
 
 Here we release several datasets that have been forced aligned with [Charsiu Forced Aligner](https://github.com/lingjzhu/charsiu). Hoepfully they might be helpful for your research. 
-Forced alignment does not generate perfect alignments. **Use at you own discrection**.
-[English]
-[Mandarin]
+Forced alignment does not generate perfect alignments. **Use at you own discrection**.  
+[English](misc/data.md#alignments-for-english-datasets)  
+[Mandarin](misc/data.md#alignments-for-mandarin-speech-datasets)  
 
 
 Please cite this if you use these alignments in your research projects.
@@ -19,8 +19,9 @@ Please cite this if you use these alignments in your research projects.
 
 ## Alignments for English datasets
 
-### Textgruds
-This repository contains phone- and word-level alignments for the English subset of Common Voice (~2000 hours). Textgrids for the trianing sets (~860k utterances) are available [here](https://drive.google.com/drive/folders/1IF0WB5-8VXfaENtE4r5rehHHK8YFe61S?usp=sharing). All filenames are matched. Only a few mismatched samples were discarded.
+### Textgrids
+This repository contains phone- and word-level alignments for the English subset of Common Voice (~2000 hours). It was aligned with `charsiu_forced_aligner` with the model `charsiu/en_w2v2_fc_10ms`. 
+Textgrids for the trianing sets (~860k utterances) are available [here](https://drive.google.com/drive/folders/1IF0WB5-8VXfaENtE4r5rehHHK8YFe61S?usp=sharing). All filenames are matched. Only a few mismatched samples were discarded. 
 
 ### Audio
 You can find the dataset at the [Common Voice Project](https://commonvoice.mozilla.org/en/datasets).  
@@ -61,7 +62,7 @@ The grapheme-to-phoneme conversion was done automatically with [`g2p_en`](https:
 This repository contains phone- and word-level alignments for multiple Mandarin Chinese speech datasets, including MagicData (~755 hours), Aishell-1 (~150 hours), STCMDS (~100 hours), Datatang (~200 hours), THCHS-30 (~30 hours) and PrimeWords (~100 hours).
 
 ### Textgrids
-You can download all textgrids [here](https://drive.google.com/drive/folders/1IF0WB5-8VXfaENtE4r5rehHHK8YFe61S?usp=sharing). The forced alignment was done with [Charsiu Forced Aligner](https://github.com/lingjzhu/charsiu) using model `charsiu/zh_xlsr_fc_10ms`. Only Praat textgrid files are distributed. Sentences with Englist letters and numbers were all removed. Misaligned files were also discarded. 
+You can download all textgrids [here](https://drive.google.com/drive/folders/1IF0WB5-8VXfaENtE4r5rehHHK8YFe61S?usp=sharing). The forced alignment was done with `charsiu_forced_aligner` using model `charsiu/zh_xlsr_fc_10ms`. Only Praat textgrid files are distributed. Sentences with Englist letters and numbers were all removed. Misaligned files were also discarded. 
 
 The grapheme-to-phoneme conversion was done automatically with [`g2pM`](https://github.com/kakaobrain/g2pM).
 ```
