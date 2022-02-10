@@ -1,4 +1,4 @@
-# Forced-aligned Datasets
+# Forced-aligned Speech Datasets
 
 Here we release several datasets that have been forced aligned with [Charsiu Forced Aligner](https://github.com/lingjzhu/charsiu). Hoepfully they might be helpful for your research. 
 Forced alignment does not generate perfect alignments. **Use at you own discrection**.  
