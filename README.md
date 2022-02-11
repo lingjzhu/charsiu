@@ -1,7 +1,7 @@
 ## Charsiu: A transformer-based phonetic aligner [[arXiv]](https://arxiv.org/abs/2110.03876)
 
 ### Updates
-- 2.10.2022. We release phone- and word-level alignments for 860k utterances in the English subset of Common Voice. Check out [this link](misc/data.md#alignments-for-english-datasets).  
+- 2.10.2022. We release phone- and word-level alignments for 860k utterances from the English subset of Common Voice. Check out [this link](misc/data.md#alignments-for-english-datasets).  
 - 1.31.2022. We release phone- and word-level alignments for over a million Mandarin utterances. Check out [this link](misc/data.md#alignments-for-mandarin-speech-datasets).  
 - 1.26.2022. Word alignment functionality has been added to `charsiu_forced_aligner` .
 
