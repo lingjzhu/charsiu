@@ -26,7 +26,7 @@ Textgrids for the trianing sets (~860k utterances) are available [here](https://
 ### Audio
 You can find the dataset at the [Common Voice Project](https://commonvoice.mozilla.org/en/datasets).  
 
-The audio data can easily accessed through [the Common Voce page](https://huggingface.co/datasets/mozilla-foundation/common_voice_8_0) at HuggingFace hub.
+The audio data can also be easily accessed through [the Common Voce page](https://huggingface.co/datasets/mozilla-foundation/common_voice_8_0) at HuggingFace hub. An account is needed for authentication.
 ```
 from datasets import load_dataset
 
