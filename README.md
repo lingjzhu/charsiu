@@ -46,6 +46,9 @@ cd charsiu
 #### Forced alignment
 ```Python
 from Charsiu import charsiu_forced_aligner
+# if there are errors importing, uncomment the following lines and add path to charsiu
+# import sys
+# sys.path.append('path_to_charsiu/src')
 
 # initialize model
 charsiu = charsiu_forced_aligner(aligner='charsiu/en_w2v2_fc_10ms')
