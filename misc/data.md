@@ -20,8 +20,8 @@ Please cite this if you use these alignments in your research projects.
 ## Alignments for English datasets
 
 ### Textgrids
-This repository contains phone- and word-level alignments for the English subset of Common Voice (~2000 hours). It was aligned with `charsiu_forced_aligner` with the model `charsiu/en_w2v2_fc_10ms`. 
-Textgrids for the trianing sets (~860k utterances) are available [in the google drive folder](https://drive.google.com/drive/folders/1IF0WB5-8VXfaENtE4r5rehHHK8YFe61S?usp=sharing). All filenames are matched. Only a few mismatched samples were discarded. 
+You can find [all textgrids for the trianing sets (~860k utterances) in this google drive folder](https://drive.google.com/drive/folders/1IF0WB5-8VXfaENtE4r5rehHHK8YFe61S?usp=sharing).It contains phone- and word-level alignments for the English subset of Common Voice (~2000 hours). It was aligned with `charsiu_forced_aligner` with the model `charsiu/en_w2v2_fc_10ms`. 
+All filenames are matched. Only a few mismatched samples were discarded. 
 
 ### Audio
 You can find the dataset at the [Common Voice Project](https://commonvoice.mozilla.org/en/datasets).  
