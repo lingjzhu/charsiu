@@ -117,8 +117,8 @@ Pretrained models are available at the 🤗 *HuggingFace* model hub: https://hug
 |:------------------:|:--------:|
 | English (American) |     √    |
 |  Mandarin Chinese  |     √    |
-|       German       | Jan 2022 |
-|       Spanish      | Feb 2022 |
+|       German       | TBD |
+|       Spanish      | TBD |
 |  English (British) |    TBD   |
 |    Cantonese       |    TBD   |
 |    AAVE            |    TBD   |
